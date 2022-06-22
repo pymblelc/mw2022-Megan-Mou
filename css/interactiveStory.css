@@ -12,6 +12,36 @@ img{
     display: none;
 }
 
+#recallBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 300;
+    display: none;
+}
+
+#transparentBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 210;
+    display: block;
+}
+
+.border{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 200;
+    display: none;
+}
+
 #archeology{
     top: 0px;
     left: 0px;
@@ -223,17 +253,17 @@ text{
 }
 
 #startGame{
-    bottom: 20px;
-    left: 20px;
+    bottom: 0px;
+    left: 0px;
     height: 50px;
     width: 100px;
-    background-color: rgb(13, 2, 37);
-    border-color: rgb(7, 7, 19);
-    border-radius: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
     position: absolute;
     display: none;
     font-family: 'Times New Roman', Times, serif;
     color: white;
+    cursor: pointer;
 }
 
 #nextScene{
@@ -264,6 +294,7 @@ text{
     z-index: 95;
     font-family: 'Times New Roman', Times, serif;
     color: white;
+    cursor: pointer;
 }
 
 .choices{
@@ -308,6 +339,24 @@ text{
     z-index: 105;
     font-family: 'Times New Roman', Times, serif;
     color: white;
+}
+
+.menu{
+    height: 50px;
+    width: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 305;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    cursor: pointer;
+}
+
+#backButton{
+    display: none;
 }
 
 #streetDestination{

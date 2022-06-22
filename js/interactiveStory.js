@@ -1,5 +1,6 @@
 //Variables
 var alreadyPlayed = 0;
+var wrongChoice = 0;
 var audioFirst = new Audio("Sounds/Melancholy.mp3");
 $(audioFirst).animate({ volume: 0 });
 
@@ -8,9 +9,9 @@ $('body').on('click', function () {
     if (alreadyPlayed == 0) {
         audioFirst.play();
         $(audioFirst).animate({ volume: 0.6 }, 2000);
-        console.log(alreadyPlayed);
         console.log('Successfully played');
         alreadyPlayed = 1;
+        console.log(alreadyPlayed);
     };
 });
 
@@ -26,7 +27,10 @@ var timeCount = 0;
 var numberCount = 1;
 var numberCount2 = 0;
 var inspection = 0;
-//var changeScreen = 0;
+var changeScreen = 0;
+var bodyAlreadyUsed = 0;
+var hoverOver = 0;
+var animationControl = 0;
 
 //Arrays
 arrCover = [
@@ -102,7 +106,7 @@ var audioThird = '';
 function nextLine(trigger, name, ID, time, title, text, characterVisible, characterHidden, characterID, extraTrigger, bonusTrigger, fileName, contextBackground) {
     var restriction = "#" + ID;
     var titleFull = "#" + title;
-    $('body').on('click', function () {
+    $('#transparentBackground').on('click', function () {
         if (timeManage == trigger) {
             $(restriction).fadeOut(time);
             setTimeout(function () {
@@ -142,36 +146,67 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     console.log('DELETTTEEEEE!!!!');
                     console.log('The next scene is scene: ' + nextSceneControl);
                     //$('#nextScene').fadeIn(3500);
-                    $('body').on('click', function () {
+                    $('#transparentBackground').on('click', function () {
                         if (nextSceneControl == 2) {
-                            setTimeout(function () { secondScene(33) }, 200);
+                            setTimeout(function () {
+                                secondScene(33)
+                                bodyAlreadyUsed = 1;
+                                console.log(bodyAlreadyUsed);
+                            }, 200);
+                            $('#transparentBackground').fadeOut(0);
                         };
                     });
                     nextSceneControl = nextSceneControl + 1;
-                } else if (trigger == 13) {
+                } else if (trigger == 12) {
                     if (inspection == 0) {
+                        $('transparentBackground').fadeOut(0);
                         $('#desk').fadeIn(1600);
                         $('#inspecting').fadeIn(1600);
                         $('#redJadeite').fadeIn(1600);
                         console.log('The time count is: ' + time);
                         inspection = 1;
                         console.log(inspection);
+                        setTimeout(function () {
+                            animationControl = 1;
+                            $('transparentBackground').fadeIn(0);
+                        }, 1600);
                     };
-                } else if (trigger == 14) {
+                } else if (trigger == 13) {
+                    $('transparentBackground').fadeOut(0);
+                    //if(animationControl == 1){
                     $('#inspecting').animate({ left: '250px', bottom: '80px' }, 1600);
                     console.log('Successful animation');
-                } else if (trigger == 15) {
+                    setTimeout(function () {
+                        animationControl = 2;
+                        $('transparentBackground').fadeIn(0);
+                    }, 1600);
+                    //};
+                    console.log("1: Haven't finished animation yet");
+                } else if (trigger == 14) {
+                    $('transparentBackground').fadeOut(0);
+                    //if(animationControl == 2){
                     $('#inspecting').animate({ width: '75%', bottom: '20px', left: '237px' }, 2000);
                     $('#redJadeite').animate({ width: '20%' }, 2000);
-                } else if (trigger == 16) {
+                    setTimeout(function () {
+                        animationControl = 3;
+                        $('transparentBackground').fadeIn(0);
+                    }, 2000);
+                    //};
+                    console.log("2: Haven't finished animation yet");
+                } else if (trigger == 15) {
+                    // $('transparentBackground').fadeOut(0);
+                    //if(animationControl == 3){
                     $('#desk').fadeOut(800);
                     $('#inspecting').fadeOut(800);
                     $('#redJadeite').fadeOut(800);
                     setTimeout(function () { deleteElements('desk'); }, 800);
-                } else if (trigger == 19) {
+                    //};
+                    console.log("3: Haven't finished animation yet");
+                } else if (trigger == 18) {
                     $('#characterC').fadeOut(2400);
                     inspection = 1;
-                } else if (trigger == 20) {
+                } else if (trigger == 19) {
+                    hoverOver = 2;
                     if (inspection == 1) {
                         $('#characterA').fadeOut(800);
                         $('#characterName').fadeOut(800);
@@ -203,35 +238,39 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                             $('#redJadeite').css({ top: '180px', width: '18%' });
                         };
                     };
-                } else if (trigger == 21) {
-                    $('#inspecting').fadeIn(800 * 2);
-                    $('#redJadeite').fadeIn(800 * 2);
-                    $('#characterA').fadeIn(800);
-                    $('#textBox').fadeIn(800);
-                } else if (trigger == 22) {
+                    //} else if (trigger == 20) {
+                    //     $('#inspecting').fadeIn(800 * 2);
+                    //     $('#redJadeite').fadeIn(800 * 2);
+                    //     $('#characterA').fadeIn(800);
+                    //     $('#textBox').fadeIn(800);
+                } else if (trigger == 20 && hoverOver == 4) {
+                    hoverOver = 5;
                     setTimeout(function () {
-                        deleteElements(undefined, undefined, undefined, undefined, "characterA", "textBox");
-                        setTimeout(function () {
-                            $('#context').fadeIn(2000)
-                            $('#prologue').fadeIn(2000);
-                        }, 1000);
+                        deleteElements(undefined, undefined, undefined, undefined, "characterA", "textBox")
+                        deleteElements('study', 'studySecond', 'studyThird', 'archeology', "inspecting", "redJadeite");
                     }, 200);
-                    deleteElements('study', 'studySecond', 'studyThird', 'archeology', "inspecting", "redJadeite");
-                } else if (trigger == 25){
+                    setTimeout(function () {
+                        $('#context').fadeIn(2000);
+                        $('#prologue').fadeIn(2000);
+                        $('#transparentBackground').fadeOut(2000);
+                    }, 1200);
+                } else if (trigger == 22) {
                     deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
+                    $('#transparentBackground').fadeOut(0);
                 }
-                else if (trigger == 27){
-                    $('#characterI').fadeOut(time*3);
+                else if (trigger == 23) {
+                    $('#characterE').css({ 'z-index': '120', left: '55px' })
+                    $('#characterI').fadeOut(2400);
                     $('#characterE').fadeIn(3000);
-                    $('#firstChoice').fadeIn(3000);
-                    $('#secondChoice').fadeIn(3000);
+                    $('#firstChoice').fadeIn(3600);
+                    $('#secondChoice').fadeIn(3600);
                 };
             });
         };
-        if(contextBackground == 1){
+        if (contextBackground == 1) {
             $('#textBox').fadeIn(time);
-        }else if(contextBackground == 2){
-            setTimeout(function(){
+        } else if (contextBackground == 2) {
+            setTimeout(function () {
                 $('#textBox').fadeIn(3000);
             });
         }
@@ -471,33 +510,49 @@ callCover('firstImage');
 (callCover('firstImage', 'secondImage'));
 setTimeout(function () { callCover('secondImage', 'thirdImage') }, 5500);
 setTimeout(function () { callCover('thirdImage', 'fourthImage') }, 11000);
-setTimeout(function () { callCover('fourthImage', 'fifthImage') }, 16500);
+setTimeout(function () {
+    callCover('fourthImage', 'fifthImage');
+    bodyAlreadyUsed = 1;
+}, 16500);
 setTimeout(function () { callCover(0, 'bambooSlip') }, 1500);
 setTimeout(function () { callCover(0, 'introduction') }, 3000);
-$('#bambooSlip').on("click", function () {
-    if (timeControl == 0) {
-        $('#introduction').fadeOut(800);
+if (changeScreen == 0) {
+    $('#transparentBackground').on("click", function () {
         setTimeout(function () {
-            $('#introduction').replaceWith('<text id="introduction">...and with a great interest, I seeked<br>for the answer...</text>');
-            $('#introduction').fadeIn(2000);
-        }, 800);
-        timeControl = 1;
-    } else if (timeControl == 1) {
-        $('#introduction').fadeOut(800);
-        setTimeout(function () {
-            $('#introduction').replaceWith('<text id="introduction">...it began back in the spring of 1974<br>...a spring when I just became<br>an archaeologist...</text>');
-            $('#introduction').fadeIn(2000);
-        }, 800);
-        $('#fifthImage').on("click", function () {
-            deleteElements('firstImage', 'secondImage', 'thirdImage', 'fourthImage', 'introduction', 'bambooSlip');
-            $("#startGame").fadeIn(7000);
-            $(audioFirst).animate({ volume: 0 }, 8000);
-        });
-        timeControl = 2;
-    } else {
-        console.log('Already changed');
-    };
-});
+            if (alreadyPlayed == 1) {
+                console.log("Waiting to change");
+                if (timeControl == 0) {
+                    $('#introduction').fadeOut(800);
+                    setTimeout(function () {
+                        $('#introduction').replaceWith('<text id="introduction">...and with a great interest, I seeked<br>for the answer...</text>');
+                        $('#introduction').fadeIn(2000);
+                    }, 800);
+                    timeControl = 1;
+                } else if (timeControl == 1) {
+                    $('#introduction').fadeOut(800);
+                    setTimeout(function () {
+                        $('#introduction').replaceWith('<text id="introduction">...it began back in the spring of 1974<br>...a spring when I just became<br>an archaeologist...</text>');
+                        $('#introduction').fadeIn(2000);
+                        $('#transparentBackground').fadeOut(2000);
+                    }, 800);
+                    $('#fifthImage').on("click", function () {
+                        if (bodyAlreadyUsed == 1) {
+                            deleteElements('firstImage', 'secondImage', 'thirdImage', 'fourthImage', 'introduction', 'bambooSlip');
+                            $("#startGame").fadeIn(7000);
+                            $(audioFirst).animate({ volume: 0 }, 8000);
+                            alreadyPlayed = 1;
+                        } else {
+                            console.log('Wait for animation to complete');
+                        }
+                    });
+                    timeControl = 2;
+                } else {
+                    console.log('Already changed');
+                };
+            };
+        }, 2000);
+    });
+};
 
 //Starting the game - plot line follows
 $('#startGame').click(function () {
@@ -508,6 +563,7 @@ $('#startGame').click(function () {
     audioSecond.play();
     $(audioSecond).animate({ volume: 0.2 }, 1000);
     deleteElements('fifthImage', 'startGame', 'bambooSlip', 'introduction');
+    $('#transparentBackground').fadeIn(0);
     $('#archeology').fadeIn(1400);
     setTimeout(function () { $('#textBox').fadeIn(2000) }, 1800);
     setTimeout(function () {
@@ -526,27 +582,55 @@ $('#startGame').click(function () {
     setTimeout(function () { nextLine(9, 'Assistant', 'backgroundContext', 800, 'characterName', 'Lady...the governor is seeking for you.', 6, 3, 'characterB', 0, 9, 'Sand'), 2400 });
 });
 
+function hover(zero, one, two, three, four, time, text, text1) {
+    var threeID = '#' + three;
+    var fourID = '#' + four;
+    $('#textBox').fadeIn(800);
+    $(zero).fadeIn(time);
+    $(one).fadeIn(time);
+    $(two).fadeIn(time);
+    $(threeID).replaceWith('<text id=' + three + '>' + text + '</text>')
+    $(threeID).fadeIn(time);
+    $(fourID).replaceWith('<text id=' + four + '>' + text1 + '</text>')
+    $(fourID).fadeIn(time);
+};
+
 //Must click to initiate
-$('.normalBackground').on('click', function () {
+$('.normalBackground').on('mouseover', function () {
     //if(changeScreen == 0){
     console.log('Clicked on study');
-    $('#characterA').fadeIn(800);
-    $('#textBox').fadeIn(800);
-    nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
-    nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
-    nextLine(12, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 12);
-    //add transition to desk
-    nextLine(13, 'You', 'backgroundContext', 800, 'characterName', 'In ancient times, the burial possessions of nobles consists of more or less, at least one jadeite.', 5, 5);
-    nextLine(14, 'You', 'backgroundContext', 800, 'characterName', 'Most were emerald and some were yellow but red...only those of extreme high status would have the opportunity to acquire.', 5);
-    nextLine(15, 'You', 'backgroundContext', 800, 'characterName', "And this...not only differs to the defective jadeites within the markets but also renders itself distinctive<br>from the high-quality ones excavated before.", 5);
-    nextLine(16, 'You', 'backgroundContext', 800, 'characterName', '...please guarantee me the permission of observing it at anytime.', 5);
-    nextLine(17, 'Governor', 'backgroundContext', 800, 'characterName', 'Lady, I trust you merely because you are an expert dispatched by the government. If anything destructive happens to<br>this jadeite, I hope you understand the consequences.', 7);
-    nextLine(18, 'You', 'backgroundContext', 800, 'characterName', 'Yes, Governor.', 9);
-    nextLine(19, 'Governor', 'backgroundContext', 800, 'characterName', 'You will have the ability to observe it anytime you want to, but only in this room.', 9, 4, '', 1, 19, 'Sand');
-    nextLine(20);
-    nextLine(21, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
-    nextLine(22, '', 'backgroundContext', 800, 'characterName', '', 9);
-    //};
+    $('#transparentBackground').fadeIn(0);
+    if (hoverOver == 0) {
+        hoverOver = 1;
+        hover('#characterA', '#characterC', undefined, 'backgroundContext', 'characterName', 800, '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 'Governor');
+        //nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
+        nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
+        nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 11);
+        //add transition to desk
+        nextLine(12, 'You', 'backgroundContext', 800, 'characterName', 'In ancient times, the burial possessions of nobles consists of more or less, at least one jadeite.', 5, 5);
+        nextLine(13, 'You', 'backgroundContext', 800, 'characterName', 'Most were emerald and some were yellow but red...only those of extreme high status would have the opportunity to acquire.', 5);
+        nextLine(14, 'You', 'backgroundContext', 800, 'characterName', "And this...not only differs to the defective jadeites within the markets but also renders itself distinctive<br>from the high-quality ones excavated before.", 5);
+        nextLine(15, 'You', 'backgroundContext', 800, 'characterName', '...please guarantee me the permission of observing it at anytime.', 5);
+        nextLine(16, 'Governor', 'backgroundContext', 800, 'characterName', 'Lady, I trust you merely because you are an expert dispatched by the government. If anything destructive happens to<br>this jadeite, I hope you understand the consequences.', 7);
+        nextLine(17, 'You', 'backgroundContext', 800, 'characterName', 'Yes, Governor.', 9);
+        nextLine(18, 'Governor', 'backgroundContext', 800, 'characterName', 'You will have the ability to observe it anytime you want to, but only in this room.', 9, 4, '', 1, 18, 'Sand');
+        nextLine(19);
+        $('#transparentBackground').on('mouseover', function () {
+            if (hoverOver == 2 && inspection == 3) {
+                hoverOver = 3;
+                //setTimeout(function () {
+                hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
+                setTimeout(function () { hoverOver = 4 }, 400);
+                //}, 1200);
+                console.log('called on function');
+            };
+            //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
+            if (hoverOver == 4) {
+                nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 9);
+            };
+            //};
+        });
+    };
 });
 
 //Array
@@ -707,7 +791,7 @@ class Female extends Character {
         // $("#characterGG").fadeOut(5000);
         // $("#characterJJ").fadeOut(5000);
         $(".hover-opacity").fadeOut(5000);
-        setTimeout(function(){
+        setTimeout(function () {
             $('.hover-opacity').remove();
         }, 5000);
         console.log('success????');
@@ -723,12 +807,12 @@ $('#context').on('click', function () {
         $("#characterFF").fadeIn(5000);
         $("#characterGG").fadeIn(5000);
         $("#characterJJ").fadeIn(5000);
-        $('#characterEE').on('click', function(){
+        $('#characterEE').on('click', function () {
             console.log('Character information...');
             var female1 = new Female('characterE', 18, 0, -150, 'female', 'E', 1195);
             //female1.create();
             female1.fadeCharacter();
-            setTimeout(function(){
+            setTimeout(function () {
                 female1.displayCharacter();
                 female1.pullInformation();
                 female1.confirmButton();
@@ -744,58 +828,117 @@ getCharacter(url, apikey, 3);
 getCharacter(url, apikey, 4);
 getCharacter(url, apikey, 5);
 var destinationWent = 0;
-var firstTime = 1;
+var firstTime = 0;
 
 //Confirming character selection
-$("#confirmSelection").click(function(){
+$("#confirmSelection").click(function () {
     $("#mapE").fadeIn(3000);
-    $(audioThird).animate({ volume: 0}, 5000);
-    setTimeout(function(){$('#characterE').fadeOut()}, 5000);
+    $(audioThird).animate({ volume: 0 }, 5000);
+    setTimeout(function () { $('#characterE').fadeOut() }, 5000);
     $("#streetDestination").fadeIn(3000);
     $("#templeDestination").fadeIn(3000);
-    $("#streetDestination").click(function(){
+    $("#streetDestination").click(function () {
         //destinationWent = 1;
         $("#streetE").fadeIn(3000);
-            $(audioThird).remove();
-            var audioFourth = new Audio("Sounds/Zhaoge.mp3");
-            $(audioFourth).animate({ volume: 0});
-            audioFourth.play();
-            $(audioFourth).animate({ volume: 0.35 }, 2000);
-            deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-            $("#teaHouseDestination").fadeIn(3000);
-            //if(firstTime == 1){
-            setTimeout(function(){
-                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
+        $(audioThird).remove();
+        var audioFourth = new Audio("Sounds/Zhaoge.mp3");
+        $(audioFourth).animate({ volume: 0 });
+        audioFourth.play();
+        $(audioFourth).animate({ volume: 0.35 }, 2000);
+        deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
+        $("#teaHouseDestination").fadeIn(3000);
+        if (firstTime == 0) {
+            $('#transparentBackground').fadeIn(0);
+            firstTime = 1;
+            setTimeout(function () {
+                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
+                //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
+                nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
+                nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
             }, 5000);
-                nextLine(24, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
-                nextLine(25, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
-                //firstTime = 0;
-            //};
-            $("#teaHouseDestination").click(function(){;
-                $("#teaHouseDestination").fadeOut(800);
-                $("#storeE").fadeIn(3000);
-                setTimeout(function(){
-                    nextLine(26, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
-                    nextLine(27, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 27, 'Sand');
-                    $("#firstChoice").click(function(){
-                        console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
-                    });
-                    $("#secondChoice").click(function(){
-                        console.log("b. (desirable choice) You followed social expectations...plot progresses");
-                    });
-                }, 3000);
+        };
+        $("#teaHouseDestination").click(function () {
+            ;
+            $("#teaHouseDestination").fadeOut(800);
+            $("#storeE").fadeIn(3000);
+            setTimeout(function () {
+                $('#transparentBackground').fadeIn(0);
+                hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 'Maid');
+                //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
+                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
+                $("#firstChoice").click(function () {
+                    console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
+                    $('transparentBackground').on('mouseover', function () { });
+                });
+                $("#secondChoice").click(function () {
+                    console.log("b. (desirable choice) You followed social expectations...plot progresses");
+                });
+            }, 3000);
         });
     });
     //Trying to code if the user could return to the big map and choose the second choice
-    $("#templeDestination").click(function(){
+    $("#templeDestination").click(function () {
+        var audioFifth = new Audio("Sounds/Temple.mp3");
+        $(audioFifth).animate({ volume: 0 });
+        audioFifth.play();
+        $(audioFifth).animate({ volume: 0.6 }, 2000);
         deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-        if(destinationWent == 0){
+        if (destinationWent == 0) {
             $("#templeDayE").fadeIn(3000);
             destination = 1;
-        }else if(destination == 1){
+        } else if (destination == 1) {
             $("#templeSunsetE").fadeIn(3000);
         };
     });
 });
 
 //The code was not actually finished...
+
+//1. Eliminate previous unneccessary errors and sophisticate the code more
+//2. Enhance user accessibility and potentially "soft code" more?
+//3. Progress on storyline and update/debug along the way
+
+arrWrong = [
+    '',
+];
+
+var indexNumber = 0;
+
+function updateArray(numberWrong) {
+    if (indexNumber != numberWrong){
+        indexNumber = indexNumber + 1;
+        console.log(indexNumber);
+    }else{
+        console.log(indexNumber = numberWrong);
+    };
+    for (var i = 0; i < numberWrong + 1; i++) {
+        //find index of object
+        objectIndex = arrWrong.findIndex((object => object[indexNumber]));
+        //log to console
+        console.log("Before update: ", arrWrong[objectIndex]);
+        //update object properties
+        arrWrong[objectIndex] = 'Ladies at that time...';
+        //log to console again
+        console.log("After update: ", arrWrong[objectIndex]);
+    };
+};
+
+$('#menuButton').click(function () {
+    $('#recallBackground').fadeIn(100);
+    $('#backButton').fadeIn(100);
+    if (wrongChoice == 0) {
+        //loop for creating all wrong choice records
+        console.log('code something that records why it was the wrong choice');
+        /*for (var i = 0; i < arrCover.length; i++) {
+            var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
+            console.log(createHTML);
+            $('.coverBackground').append(createHTML);
+        };*/
+        updateArray(2);
+    };
+});
+
+$('#backButton').click(function () {
+    $('#recallBackground').fadeOut(100);
+    $('#backButton').fadeOut(100);
+});
