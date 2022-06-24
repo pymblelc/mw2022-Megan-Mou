@@ -1,6 +1,5 @@
 //Variables
 var alreadyPlayed = 0;
-var wrongChoice = 0;
 var audioFirst = new Audio("Sounds/Melancholy.mp3");
 $(audioFirst).animate({ volume: 0 });
 
@@ -620,12 +619,12 @@ $('.normalBackground').on('mouseover', function () {
                 hoverOver = 3;
                 //setTimeout(function () {
                 hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
-                setTimeout(function () { hoverOver = 4 }, 400);
+                //setTimeout(function () { hoverOver = 4 }, 400);
                 //}, 1200);
                 console.log('called on function');
             };
             //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
-            if (hoverOver == 4) {
+            if (hoverOver == 3) {
                 nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 9);
             };
             //};
@@ -899,43 +898,63 @@ $("#confirmSelection").click(function () {
 //3. Progress on storyline and update/debug along the way
 
 arrWrong = [
-    '',
 ];
+
+arrDescription = [
+    "Ladies at that time...",
+    "I don't know what to say next...",
+    "Maybe anything will do...",
+    "Actually one more..."
+]
 
 var indexNumber = 0;
 
-function updateArray(numberWrong) {
-    if (indexNumber != numberWrong){
-        indexNumber = indexNumber + 1;
-        console.log(indexNumber);
-    }else{
-        console.log(indexNumber = numberWrong);
+function updateArray(numberWrong, wrongChoice) {
+    //numberWrong is the number of wrong choices and index number is the number of indexes supposedly to be updated
+    //numberWrong should be able to indicate how many rows in arrWrong needs to be updated
+    console.log('Array wrong length: ' + arrWrong.length, numberWrong);
+    for (var i = 0; i < numberWrong; i++) {
+        var addObject = '';
+        arrWrong.push(addObject);
+        console.log(arrWrong);
     };
-    for (var i = 0; i < numberWrong + 1; i++) {
-        //find index of object
-        objectIndex = arrWrong.findIndex((object => object[indexNumber]));
-        //log to console
-        console.log("Before update: ", arrWrong[objectIndex]);
-        //update object properties
-        arrWrong[objectIndex] = 'Ladies at that time...';
-        //log to console again
-        console.log("After update: ", arrWrong[objectIndex]);
+    //code something to detect how many objects are in the array
+    let counter = 0;
+    for (obj of arrWrong) {
+        counter++;
     };
+    console.log(counter);
+
+    objIndex = arrWrong.findIndex((obj => obj[indexNumber]));
+    //Log object to Console.
+    console.log("Before update: ", arrWrong[indexNumber], arrWrong);
+    //Update object's name property.
+    arrWrong[indexNumber] = arrDescription[numberWrong - 1];
+    //Log object to console again.
+    console.log("After update: ", arrWrong[indexNumber], arrWrong);
+    indexNumber = indexNumber + 1;
+    console.log(indexNumber);
+
+    // if (wrongChoice == numberWrong) {
+    //     for (var i = 0; i < arrWrong; i++) {
+
+    //     };
+    // };
 };
 
 $('#menuButton').click(function () {
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
-    if (wrongChoice == 0) {
-        //loop for creating all wrong choice records
-        console.log('code something that records why it was the wrong choice');
-        /*for (var i = 0; i < arrCover.length; i++) {
-            var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
-            console.log(createHTML);
-            $('.coverBackground').append(createHTML);
-        };*/
-        updateArray(2);
-    };
+    //if (wrongChoice == 0) {
+    //loop for creating all wrong choice records
+    console.log('code something that records why it was the wrong choice');
+    /*for (var i = 0; i < arrCover.length; i++) {
+        var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
+        console.log(createHTML);
+        $('.coverBackground').append(createHTML);
+    };*/
+    //};
+    updateArray(4, 6);
 });
 
 $('#backButton').click(function () {
