@@ -619,7 +619,7 @@ $('.normalBackground').on('mouseover', function () {
                 hoverOver = 3;
                 //setTimeout(function () {
                 hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
-                //setTimeout(function () { hoverOver = 4 }, 400);
+                setTimeout(function () { hoverOver = 4 }, 400);
                 //}, 1200);
                 console.log('called on function');
             };
@@ -866,7 +866,8 @@ $("#confirmSelection").click(function () {
                 //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
                 nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
                 $("#firstChoice").click(function () {
-                    console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
+                    updateArray(1);
+                    console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move.");
                     $('transparentBackground').on('mouseover', function () { });
                 });
                 $("#secondChoice").click(function () {
@@ -900,10 +901,10 @@ $("#confirmSelection").click(function () {
 arrWrong = [];
 
 arrDescription = [
-    {question: "Listen or not", description: "Ladies at that time..."},
-    {question: "second question", description: "I don't know what to say next..."},
-    {question: "third question", description: "Maybe anything will do..."},
-    {question: "fourth question", description: "Actually one more..."},
+    { question: "Listen or not", description: "Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others." },
+    { question: "second question", description: "I don't know what to say next..." },
+    { question: "third question", description: "Maybe anything will do..." },
+    { question: "fourth question", description: "Actually one more..." },
 ]
 
 var indexNumber = 0;
@@ -944,7 +945,7 @@ $('#menuButton').click(function () {
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
     //updateArray(4);
-    $.each(arrWrong, function(index, value){
+    $.each(arrWrong, function (index, value) {
         $(".arrays").append(value.question + " (" + value.questionNumber + "): " + value.description + '<br>');
     });
 });
