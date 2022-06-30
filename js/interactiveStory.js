@@ -897,67 +897,60 @@ $("#confirmSelection").click(function () {
 //2. Enhance user accessibility and potentially "soft code" more?
 //3. Progress on storyline and update/debug along the way
 
-arrWrong = [
-];
+arrWrong = [];
 
 arrDescription = [
-    "Ladies at that time...",
-    "I don't know what to say next...",
-    "Maybe anything will do...",
-    "Actually one more..."
+    {question: "Listen or not", description: "Ladies at that time..."},
+    {question: "second question", description: "I don't know what to say next..."},
+    {question: "third question", description: "Maybe anything will do..."},
+    {question: "fourth question", description: "Actually one more..."},
 ]
 
 var indexNumber = 0;
 
-function updateArray(numberWrong, wrongChoice) {
+function updateArray(numberWrong) {
     //numberWrong is the number of wrong choices and index number is the number of indexes supposedly to be updated
     //numberWrong should be able to indicate how many rows in arrWrong needs to be updated
     console.log('Array wrong length: ' + arrWrong.length, numberWrong);
-    for (var i = 0; i < numberWrong; i++) {
-        var addObject = '';
-        arrWrong.push(addObject);
-        console.log(arrWrong);
-    };
     //code something to detect how many objects are in the array
-    let counter = 0;
-    for (obj of arrWrong) {
-        counter++;
-    };
-    console.log(counter);
+    // let counter = arrWrong.length;
 
-    objIndex = arrWrong.findIndex((obj => obj[indexNumber]));
-    //Log object to Console.
-    console.log("Before update: ", arrWrong[indexNumber], arrWrong);
-    //Update object's name property.
-    arrWrong[indexNumber] = arrDescription[numberWrong - 1];
-    //Log object to console again.
-    console.log("After update: ", arrWrong[indexNumber], arrWrong);
-    indexNumber = indexNumber + 1;
-    console.log(indexNumber);
-
-    // if (wrongChoice == numberWrong) {
-    //     for (var i = 0; i < arrWrong; i++) {
-
-    //     };
+    // for (var i = 0; i < counter; i++) {
+    //     var addObject = '';
+    //     arrWrong.push(addObject);
+    //     console.log(arrWrong);
     // };
+
+    // objIndex = arrWrong.findIndex((obj => obj[indexNumber]));
+    // //Log object to Console.
+    // console.log("Before update: ", arrWrong[indexNumber], arrWrong);
+    // //Update object's name property.
+    // arrWrong[indexNumber] = arrDescription[numberWrong - 1];
+    // //Log object to console again.
+    // console.log("After update: ", arrWrong[indexNumber], arrWrong);
+    // indexNumber = indexNumber + 1;
+    // console.log(indexNumber);
+
+    let wrong = {
+        question: arrDescription[numberWrong - 1].question,
+        questionNumber: numberWrong,
+        description: arrDescription[numberWrong - 1].description,
+    };
+
+    arrWrong.push(wrong);
 };
 
 $('#menuButton').click(function () {
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
-    //if (wrongChoice == 0) {
-    //loop for creating all wrong choice records
-    console.log('code something that records why it was the wrong choice');
-    /*for (var i = 0; i < arrCover.length; i++) {
-        var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
-        console.log(createHTML);
-        $('.coverBackground').append(createHTML);
-    };*/
-    //};
-    updateArray(4, 6);
+    //updateArray(4);
+    $.each(arrWrong, function(index, value){
+        $(".arrays").append(value.question + " (" + value.questionNumber + "): " + value.description + '<br>');
+    });
 });
 
 $('#backButton').click(function () {
     $('#recallBackground').fadeOut(100);
     $('#backButton').fadeOut(100);
+    $('.arrays').empty();
 });

@@ -85,6 +85,14 @@ text{
     display: none;
 }
 
+.arrays{
+    z-index: 300;
+    position: absolute;
+    display: block;
+    top: 180px;
+    left: 450px;
+}
+
 #prologue{
     position: absolute;
     left: 650px;
