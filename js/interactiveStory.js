@@ -263,6 +263,16 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     $('#characterE').fadeIn(3000);
                     $('#firstChoice').fadeIn(3600);
                     $('#secondChoice').fadeIn(3600);
+                    $('#transparentBackground').fadeOut(0);
+                }else if (trigger == 24) {
+                    if (numberChoices == 0){
+                        $('#characterE').fadeOut(800);
+                        $('#textBox').fadeOut(800);
+                        setTimeout(function(){
+                            $(audioFile).animate({volume: 0});
+                            console.log('Minimised volume');
+                        }, 6000);
+                    };
                 };
             });
         };
@@ -862,16 +872,29 @@ $("#confirmSelection").click(function () {
             $("#storeE").fadeIn(3000);
             setTimeout(function () {
                 $('#transparentBackground').fadeIn(0);
-                hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 'Maid');
+                hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment. The private room upstairs is ready for use at any time. I will just tell the manager of any dietetic restraints.', 'Maid');
                 //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
-                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
+                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you stood quietly at the foot of the stairs and paused. Looking around, you noticed that there were two different tables<br>of guests located just under your private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
                 $("#firstChoice").click(function () {
+                    $('#transparentBackground').fadeIn(0);
                     updateArray(1);
-                    console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move.");
-                    $('transparentBackground').on('mouseover', function () { });
+                    if (hoverOver == 5){
+                        hoverOver = 6;
+                        deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
+                        hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
+                    };
+                    //console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind, managed to stay but not move.");
                 });
                 $("#secondChoice").click(function () {
-                    console.log("b. (desirable choice) You followed social expectations...plot progresses");
+                    $('#transparentBackground').fadeIn(0);
+                    if (hoverOver == 5){
+                        hoverOver = 6;
+                        deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
+                        hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You gently lowered your eyes and walked up the stairs towards the second floor.");
+                        nextLine(24, '', 'backgroundInformation', 800, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
+                        nextLine(25);
+                    }
+                    //console.log("b. (desirable choice) You followed social expectations...plot progresses");
                 });
             }, 3000);
         });
@@ -901,13 +924,14 @@ $("#confirmSelection").click(function () {
 arrWrong = [];
 
 arrDescription = [
-    { question: "Listen or not", description: "Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others." },
+    { question: "Listen or not", description: "All ladies from noble families had extremely strict standards of behaviour,<br>which also includes not to listen on others' conversations without invitation." },
     { question: "second question", description: "I don't know what to say next..." },
     { question: "third question", description: "Maybe anything will do..." },
     { question: "fourth question", description: "Actually one more..." },
 ]
 
 var indexNumber = 0;
+var numberChoices = 0;
 
 function updateArray(numberWrong) {
     //numberWrong is the number of wrong choices and index number is the number of indexes supposedly to be updated
@@ -937,11 +961,12 @@ function updateArray(numberWrong) {
         questionNumber: numberWrong,
         description: arrDescription[numberWrong - 1].description,
     };
-
     arrWrong.push(wrong);
+    $('#menuButton').animate({'background-color':'rgb(245, 240, 213)', color: 'rgb(95, 81, 43)'}, 800);
 };
 
 $('#menuButton').click(function () {
+    $('#menuButton').animate({'background-color':'rgb(95, 81, 43);', color: 'white'}, 100);
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
     //updateArray(4);
