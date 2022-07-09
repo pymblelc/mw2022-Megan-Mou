@@ -2,6 +2,8 @@ img{
     position: absolute;
 }
 
+/*background images*/
+
 #context{
     position: absolute;
     width: 100%;
@@ -30,6 +32,16 @@ img{
     top: 0px;
     z-index: 210;
     display: block;
+}
+
+#backUp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 220;
+    display: none;
 }
 
 .border{
@@ -169,11 +181,45 @@ text{
     display: none;
 }
 
+#characterH{
+    width: 45%;
+    height: -webkit-fill-available;
+    left: 350px;
+    bottom: 0px;
+    object-fit: cover;
+    display: none;
+}
+
 #characterI{
     width: 43%;
     z-index: 120;
-    bottom: 0px;
     left: 400px;
+    bottom: 0px;
+    display: none;
+}
+
+#characterK{
+    width: 55%;
+    left: 400px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterL{
+    width: 40%;
+    left: 420px;
+    bottom: 0px;
+    display: none;
+}
+
+#characterM{
+    width: 48%;
+    height: -webkit-fill-available;
+    left: 350px;
+    bottom: 0px;
+    object-fit: cover;
+    z-index: 120;
     display: none;
 }
 

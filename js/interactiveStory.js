@@ -102,7 +102,7 @@ function callCover(wordID, secondNumberID) {
 var audioThird = '';
 
 //Function for calling the next line of the plot
-function nextLine(trigger, name, ID, time, title, text, characterVisible, characterHidden, characterID, extraTrigger, bonusTrigger, fileName, contextBackground) {
+function nextLine(trigger, name, ID, time, title, text, characterVisible, characterHidden, characterID, extraTrigger, bonusTrigger, fileName, contextBackground, hideCharacter, hide) {
     var restriction = "#" + ID;
     var titleFull = "#" + title;
     $('#transparentBackground').on('click', function () {
@@ -140,6 +140,10 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         $(audioFile).animate({ volume: 0.55 })
                         console.log('File was played...')
                     }, time / 5);
+                };
+                if (hideCharacter == extraTrigger) {
+                    var hideWhat = '#' + hide;
+                    $(hideWhat).fadeOut(time * 2);
                 };
                 if (trigger == 9) {
                     console.log('DELETTTEEEEE!!!!');
@@ -206,6 +210,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     inspection = 1;
                 } else if (trigger == 19) {
                     hoverOver = 2;
+                    $('#backUp').fadeIn(0);
                     if (inspection == 1) {
                         $('#characterA').fadeOut(800);
                         $('#characterName').fadeOut(800);
@@ -264,16 +269,21 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     $('#firstChoice').fadeIn(3600);
                     $('#secondChoice').fadeIn(3600);
                     $('#transparentBackground').fadeOut(0);
-                }else if (trigger == 24) {
-                    if (numberChoices == 0){
+                    $(audioFourth).animate({ volume: 0 }, 12500);
+                } else if (trigger == 24) {
+                    if (numberChoices == 0) {
                         $('#characterE').fadeOut(800);
                         $('#textBox').fadeOut(800);
-                        setTimeout(function(){
-                            $(audioFile).animate({volume: 0});
+                        setTimeout(function () {
+                            $(audioFile).animate({ volume: 0 });
                             console.log('Minimised volume');
                         }, 6000);
+                    } else {
+                        //$('#characterM').fadeOut(800);
                     };
-                };
+                } else if (trigger == 25) {
+                    //$('#characterK').fadeOut(800);
+                }
             });
         };
         if (contextBackground == 1) {
@@ -624,7 +634,8 @@ $('.normalBackground').on('mouseover', function () {
         nextLine(17, 'You', 'backgroundContext', 800, 'characterName', 'Yes, Governor.', 9);
         nextLine(18, 'Governor', 'backgroundContext', 800, 'characterName', 'You will have the ability to observe it anytime you want to, but only in this room.', 9, 4, '', 1, 18, 'Sand');
         nextLine(19);
-        $('#transparentBackground').on('mouseover', function () {
+        $('#backUp').hover(function () {
+            //$('#backUp').on('mouseover', function () {
             if (hoverOver == 2 && inspection == 3) {
                 hoverOver = 3;
                 //setTimeout(function () {
@@ -635,9 +646,11 @@ $('.normalBackground').on('mouseover', function () {
             };
             //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
             if (hoverOver == 3) {
+                $('#backUp').fadeOut(0);
                 nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 9);
             };
             //};
+            //});
         });
     };
 });
@@ -838,6 +851,15 @@ getCharacter(url, apikey, 4);
 getCharacter(url, apikey, 5);
 var destinationWent = 0;
 var firstTime = 0;
+var yChoice = 0;
+var audioFourth = new Audio("Sounds/Zhaoge.mp3");
+
+function audioGlobal(ID, file, control) {
+    var ID = new Audio(file);
+    $(ID).animate({ volume: 0 });
+    ID.play();
+    $(ID).animate({ volume: control }, 3000);
+};
 
 //Confirming character selection
 $("#confirmSelection").click(function () {
@@ -847,10 +869,9 @@ $("#confirmSelection").click(function () {
     $("#streetDestination").fadeIn(3000);
     $("#templeDestination").fadeIn(3000);
     $("#streetDestination").click(function () {
-        //destinationWent = 1;
+        destinationWent = 1;
         $("#streetE").fadeIn(3000);
         $(audioThird).remove();
-        var audioFourth = new Audio("Sounds/Zhaoge.mp3");
         $(audioFourth).animate({ volume: 0 });
         audioFourth.play();
         $(audioFourth).animate({ volume: 0.35 }, 2000);
@@ -878,23 +899,31 @@ $("#confirmSelection").click(function () {
                 $("#firstChoice").click(function () {
                     $('#transparentBackground').fadeIn(0);
                     updateArray(1);
-                    if (hoverOver == 5){
+                    if (hoverOver == 5) {
                         hoverOver = 6;
+                        numberChoices = 1;
                         deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
                         hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
+                        if (yChoice == 0) {
+                            $('#transparentBackground').on('click', function () {
+                                if (yChoice == 0) {
+                                    setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 400);
+                                    yChoice = 1;
+                                };
+                                guestConversation(24);
+                            });
+                        };
                     };
-                    //console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind, managed to stay but not move.");
                 });
                 $("#secondChoice").click(function () {
                     $('#transparentBackground').fadeIn(0);
-                    if (hoverOver == 5){
+                    if (hoverOver == 5) {
                         hoverOver = 6;
                         deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
                         hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You gently lowered your eyes and walked up the stairs towards the second floor.");
                         nextLine(24, '', 'backgroundInformation', 800, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
                         nextLine(25);
                     }
-                    //console.log("b. (desirable choice) You followed social expectations...plot progresses");
                 });
             }, 3000);
         });
@@ -912,8 +941,28 @@ $("#confirmSelection").click(function () {
         } else if (destination == 1) {
             $("#templeSunsetE").fadeIn(3000);
         };
+        $('#enterTemple').fadeIn(3000);
+        $('#enterTemple').click(function () {
+
+        });
     });
 });
+
+function guestConversation(beginningLine) {
+    $('#characterE').fadeOut(2400);
+    if (yChoice == 1) {
+        console.log("I'm heeerrrrreeeee");
+        $("#roomE").fadeIn(3000);
+        if (hoverOver == 6) {
+            hoverOver = 7;
+            hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) Isn't that Miss Xiao? She generally doesn’t accept any invitations to social events and there is no easy way to see her. I guess we<br>were quite fortunate today.", 'Male Guest One');
+        };
+        nextLine(beginningLine, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'It is said that she had just been ranked as the most talented lady of Zhaoge recently. Her number of votes is far beyond other ladies.', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
+        nextLine(beginningLine + 1, 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
+        nextLine(beginningLine + 2, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Including you?', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
+        //nextLine(beginningLine + 3, 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Including me.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
+    };
+};
 
 //The code was not actually finished...
 
@@ -962,11 +1011,11 @@ function updateArray(numberWrong) {
         description: arrDescription[numberWrong - 1].description,
     };
     arrWrong.push(wrong);
-    $('#menuButton').animate({'background-color':'rgb(245, 240, 213)', color: 'rgb(95, 81, 43)'}, 800);
+    $('#menuButton').animate({ 'background-color': 'rgb(245, 240, 213)', color: 'rgb(95, 81, 43)', 'border-color': 'rgb(95, 81, 43);' }, 800);
 };
 
 $('#menuButton').click(function () {
-    $('#menuButton').animate({'background-color':'rgb(95, 81, 43);', color: 'white'}, 100);
+    $('#menuButton').animate({ 'background-color': 'rgb(95, 81, 43);', color: 'white', 'border-color': 'rgb(245, 240, 213);' }, 100);
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
     //updateArray(4);
