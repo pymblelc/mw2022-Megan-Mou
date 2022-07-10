@@ -30,6 +30,7 @@ var changeScreen = 0;
 var bodyAlreadyUsed = 0;
 var hoverOver = 0;
 var animationControl = 0;
+var beginningPlus = 0;
 
 //Arrays
 arrCover = [
@@ -278,12 +279,14 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                             $(audioFile).animate({ volume: 0 });
                             console.log('Minimised volume');
                         }, 6000);
-                    } else {
-                        //$('#characterM').fadeOut(800);
+                    }
+                } else if (trigger == 28) {
+                    if (numberChoices == 0){
+
+                    }else{
+                        $('#textBox').fadeOut(time);
                     };
-                } else if (trigger == 25) {
-                    //$('#characterK').fadeOut(800);
-                }
+                };
             });
         };
         if (contextBackground == 1) {
@@ -909,8 +912,8 @@ $("#confirmSelection").click(function () {
                                 if (yChoice == 0) {
                                     setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 400);
                                     yChoice = 1;
+                                    guestConversation(24);
                                 };
-                                guestConversation(24);
                             });
                         };
                     };
@@ -949,18 +952,22 @@ $("#confirmSelection").click(function () {
 });
 
 function guestConversation(beginningLine) {
+    //Creating a parameter to determine the beginning trigger for the conversation does not work - could not code the trigger to automatically update by one & beginningLine + 1, beginningLine + 2 does not work
     $('#characterE').fadeOut(2400);
-    if (yChoice == 1) {
-        console.log("I'm heeerrrrreeeee");
-        $("#roomE").fadeIn(3000);
-        if (hoverOver == 6) {
-            hoverOver = 7;
+    //console.log("I'm heeerrrrreeeee");
+    $("#roomE").fadeIn(3000);
+    if (hoverOver == 6) {
+        hoverOver = 7;
+        if (yChoice == 1) {
             hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) Isn't that Miss Xiao? She generally doesn’t accept any invitations to social events and there is no easy way to see her. I guess we<br>were quite fortunate today.", 'Male Guest One');
+            nextLine(beginningLine, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'It is said that she had just been ranked as the most talented lady of Zhaoge recently. Her number of votes is far beyond other ladies.', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
+            nextLine((beginningLine + 1), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
+            nextLine((beginningLine + 2), 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Including you?', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
+            nextLine((beginningLine + 3), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Including me.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
+            nextLine((beginningLine + 4), '', 'backgroundInformation', 800, 'characterTitle', '', 11, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterM');
+        } else {
+            hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) ...Miss Xiao? She...invitations to...events...no easy way to see...quite fortunate...", 'Male Guest One');
         };
-        nextLine(beginningLine, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'It is said that she had just been ranked as the most talented lady of Zhaoge recently. Her number of votes is far beyond other ladies.', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
-        nextLine(beginningLine + 1, 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
-        nextLine(beginningLine + 2, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Including you?', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
-        //nextLine(beginningLine + 3, 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Including me.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
     };
 };
 
