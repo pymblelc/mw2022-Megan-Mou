@@ -187,6 +187,7 @@ text{
     left: 350px;
     bottom: 0px;
     object-fit: cover;
+    z-index: 120;
     display: none;
 }
 
@@ -210,6 +211,7 @@ text{
     width: 40%;
     left: 420px;
     bottom: 0px;
+    z-index: 120;
     display: none;
 }
 

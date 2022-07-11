@@ -280,12 +280,6 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                             console.log('Minimised volume');
                         }, 6000);
                     }
-                } else if (trigger == 28) {
-                    if (numberChoices == 0){
-
-                    }else{
-                        $('#textBox').fadeOut(time);
-                    };
                 };
             });
         };
@@ -964,7 +958,12 @@ function guestConversation(beginningLine) {
             nextLine((beginningLine + 1), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
             nextLine((beginningLine + 2), 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Including you?', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
             nextLine((beginningLine + 3), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Including me.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
-            nextLine((beginningLine + 4), '', 'backgroundInformation', 800, 'characterTitle', '', 11, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterM');
+            nextLine((beginningLine + 4), '', 'backgroundInformation', 1600, 'characterTitle', 'At the same time...on the other table...', 11, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterM');
+            nextLine((beginningLine + 5), 'Female Guest One', 'backgroundInformation', 1600, 'characterTitle', "(Sipping the teacup gently) Isn't that Miss Xiao? Finally free today after all her messes?", 1, undefined, 'characterH', 0, (beginningLine + 5), 'Surprised');
+            nextLine((beginningLine + 6), 'Female Guest Two', 'backgroundInformation', 800, 'characterTitle', "That being said, she doesn't go to any public events. Interpreting it nicely than she’s just unapproachable, but interpreting straightforwardly...<br>than she’s just ungrateful.", 1, undefined, 'characterL', 0, undefined, undefined, undefined, 0, 'characterH');
+            nextLine((beginningLine + 7), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', "Don’t say it like this, if someone who cares listened, you’d be attacked by her crazy admirers.", 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
+            nextLine((beginningLine + 8), 'Female Guest Two', 'backgroundInformation', 800, 'characterTitle', "(Continuing on her embroidery) So the truth can’t even be told? I wonder why those young talents fancied her, even the ones above.", 1, undefined, 'characterL', 0, (beginningLine + 8), 'Irritated', undefined, 0, 'characterH');
+            nextLine((beginningLine + 9), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', '(Pursing her lips and smiled) Who knows.', 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
         } else {
             hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) ...Miss Xiao? She...invitations to...events...no easy way to see...quite fortunate...", 'Male Guest One');
         };
