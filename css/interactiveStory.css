@@ -114,18 +114,60 @@ text{
     display: none;
 }
 
-#characterIdentity{
-    z-index: 90;
-    font-weight: bold;
-    font-size: xx-large;
+#characterIdentityE{
     top: 250px;
     right: 500px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
 }
 
 #characterEIdentity{
-    z-index: 90;
     right: 160px;
     top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityF{
+    top: 250px;
+    left: 250px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterFIdentity{
+    left: 320px;
+    top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityG{
+    top: 250px;
+    right: 500px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterGIdentity{
+    right: 160px;
+    top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityJ{
+    top: 250px;
+    left: 250px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterJIdentity{
+    left: 320px;
+    top: 350px;
+    z-index: 90;
 }
 
 #greenJadeite{

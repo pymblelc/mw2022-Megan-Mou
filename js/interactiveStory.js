@@ -30,7 +30,7 @@ var changeScreen = 0;
 var bodyAlreadyUsed = 0;
 var hoverOver = 0;
 var animationControl = 0;
-var beginningPlus = 0;
+var chosenStory = 0;
 
 //Arrays
 arrCover = [
@@ -792,9 +792,10 @@ class Female extends Character {
     }//Two methods
     pullInformation() {
         var displayInfo = '#character' + this.image + 'Identity';
+        var displayInfo1 = '#characterIdentity' + this.image;
         console.log(displayInfo);
         $(displayInfo).fadeIn(5000);
-        $('#characterIdentity').fadeIn(5000);
+        $(displayInfo1).fadeIn(5000);
         console.log("Loading the character's background information and details...");
     }
     chooseAnother() {
@@ -827,19 +828,56 @@ $('#context').on('click', function () {
         $("#characterGG").fadeIn(5000);
         $("#characterJJ").fadeIn(5000);
         $('#characterEE').on('click', function () {
-            console.log('Character information...');
-            var female1 = new Female('characterE', 18, 0, -150, 'female', 'E', 1195);
+            console.log('Character information: E');
+            var female1 = new Female('characterE', 15, 0, -150, 'female', 'E', 1195);
             //female1.create();
-            female1.fadeCharacter();
-            setTimeout(function () {
-                female1.displayCharacter();
-                female1.pullInformation();
-                female1.confirmButton();
-            }, 5000);
-            console.log('...')
+            // female1.fadeCharacter();
+            // setTimeout(function () {
+            //     female1.displayCharacter();
+            //     female1.pullInformation();
+            //     female1.confirmButton();
+            // }, 5000);
+            creatingCharacter(female1);
+            chosenStory = 1;
+            console.log('Chosen story: ' + chosenStory);
+        });
+        $('#characterFF').on('click', function () {
+            console.log('Character information: F');
+            var female2 = new Female('characterF', 17, 0, 650, 'female', 'F', 700);
+            creatingCharacter(female2);
+            console.log(creatingCharacter(female2));
+            chosenStory = 2;
+            console.log('Chosen story: ' + chosenStory);
+            $('#confirmSelection').css({ right: '730px' });
+        });
+        $('#characterGG').on('click', function () {
+            console.log('Character information: G');
+            var female3 = new Female('characterG', 16, 0, 33, 'female', 'G', 800);
+            creatingCharacter(female3);
+            chosenStory = 3;
+            console.log('Chosen story: ' + chosenStory);
+        });
+        $('#characterJJ').on('click', function () {
+            console.log('Character information: J');
+            var female4 = new Female('characterJ', 18, 0, 713, 'female', 'J', 650);
+            creatingCharacter(female4);
+            chosenStory = 4;
+            console.log('Chosen story: ' + chosenStory);
+            $('#confirmSelection').css({ right: '730px' });
         });
     });
 });
+
+//Creating character - selection page
+function creatingCharacter(female) {
+    female.fadeCharacter();
+    setTimeout(function () {
+        female.displayCharacter();
+        female.pullInformation();
+        female.confirmButton();
+    }, 5000);
+    console.log('... ' + female + ' ...');
+};
 
 //calling the database
 getCharacter(url, apikey, 2);
@@ -860,89 +898,91 @@ function audioGlobal(ID, file, control) {
 
 //Confirming character selection
 $("#confirmSelection").click(function () {
-    $("#mapE").fadeIn(3000);
-    $(audioThird).animate({ volume: 0 }, 5000);
-    setTimeout(function () { $('#characterE').fadeOut() }, 5000);
-    $("#streetDestination").fadeIn(3000);
-    $("#templeDestination").fadeIn(3000);
-    $("#streetDestination").click(function () {
-        destinationWent = 1;
-        $("#streetE").fadeIn(3000);
-        $(audioThird).remove();
-        $(audioFourth).animate({ volume: 0 });
-        audioFourth.play();
-        $(audioFourth).animate({ volume: 0.35 }, 2000);
-        deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-        $("#teaHouseDestination").fadeIn(3000);
-        if (firstTime == 0) {
-            $('#transparentBackground').fadeIn(0);
-            firstTime = 1;
-            setTimeout(function () {
-                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
-                //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
-                nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
-                nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
-            }, 5000);
-        };
-        $("#teaHouseDestination").click(function () {
-            ;
-            $("#teaHouseDestination").fadeOut(800);
-            $("#storeE").fadeIn(3000);
-            setTimeout(function () {
+    if (chosenStory == 1) {
+        $("#mapE").fadeIn(3000);
+        $(audioThird).animate({ volume: 0 }, 5000);
+        setTimeout(function () { $('#characterE').fadeOut() }, 5000);
+        $("#streetDestination").fadeIn(3000);
+        $("#templeDestination").fadeIn(3000);
+        $("#streetDestination").click(function () {
+            destinationWent = 1;
+            $("#streetE").fadeIn(3000);
+            $(audioThird).remove();
+            $(audioFourth).animate({ volume: 0 });
+            audioFourth.play();
+            $(audioFourth).animate({ volume: 0.35 }, 2000);
+            deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
+            $("#teaHouseDestination").fadeIn(3000);
+            if (firstTime == 0) {
                 $('#transparentBackground').fadeIn(0);
-                hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment. The private room upstairs is ready for use at any time. I will just tell the manager of any dietetic restraints.', 'Maid');
-                //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
-                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you stood quietly at the foot of the stairs and paused. Looking around, you noticed that there were two different tables<br>of guests located just under your private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
-                $("#firstChoice").click(function () {
+                firstTime = 1;
+                setTimeout(function () {
+                    hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
+                    //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
+                    nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
+                    nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
+                }, 5000);
+            };
+            $("#teaHouseDestination").click(function () {
+                ;
+                $("#teaHouseDestination").fadeOut(800);
+                $("#storeE").fadeIn(3000);
+                setTimeout(function () {
                     $('#transparentBackground').fadeIn(0);
-                    updateArray(1);
-                    if (hoverOver == 5) {
-                        hoverOver = 6;
-                        numberChoices = 1;
-                        deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
-                        hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
-                        if (yChoice == 0) {
-                            $('#transparentBackground').on('click', function () {
-                                if (yChoice == 0) {
-                                    setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 400);
-                                    yChoice = 1;
-                                    guestConversation(24);
-                                };
-                            });
+                    hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment. The private room upstairs is ready for use at any time. I will just tell the manager of any dietetic restraints.', 'Maid');
+                    //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
+                    nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you stood quietly at the foot of the stairs and paused. Looking around, you noticed that there were two different tables<br>of guests located just under your private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
+                    $("#firstChoice").click(function () {
+                        $('#transparentBackground').fadeIn(0);
+                        updateArray(1);
+                        if (hoverOver == 5) {
+                            hoverOver = 6;
+                            numberChoices = 1;
+                            deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
+                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
+                            if (yChoice == 0) {
+                                $('#transparentBackground').on('click', function () {
+                                    if (yChoice == 0) {
+                                        setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 400);
+                                        yChoice = 1;
+                                        guestConversation(24);
+                                    };
+                                });
+                            };
                         };
-                    };
-                });
-                $("#secondChoice").click(function () {
-                    $('#transparentBackground').fadeIn(0);
-                    if (hoverOver == 5) {
-                        hoverOver = 6;
-                        deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
-                        hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You gently lowered your eyes and walked up the stairs towards the second floor.");
-                        nextLine(24, '', 'backgroundInformation', 800, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
-                        nextLine(25);
-                    }
-                });
-            }, 3000);
+                    });
+                    $("#secondChoice").click(function () {
+                        $('#transparentBackground').fadeIn(0);
+                        if (hoverOver == 5) {
+                            hoverOver = 6;
+                            deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
+                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You gently lowered your eyes and walked up the stairs towards the second floor.");
+                            nextLine(24, '', 'backgroundInformation', 800, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
+                            nextLine(25);
+                        }
+                    });
+                }, 3000);
+            });
         });
-    });
-    //Trying to code if the user could return to the big map and choose the second choice
-    $("#templeDestination").click(function () {
-        var audioFifth = new Audio("Sounds/Temple.mp3");
-        $(audioFifth).animate({ volume: 0 });
-        audioFifth.play();
-        $(audioFifth).animate({ volume: 0.6 }, 2000);
-        deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-        if (destinationWent == 0) {
-            $("#templeDayE").fadeIn(3000);
-            destination = 1;
-        } else if (destination == 1) {
-            $("#templeSunsetE").fadeIn(3000);
-        };
-        $('#enterTemple').fadeIn(3000);
-        $('#enterTemple').click(function () {
+        //Trying to code if the user could return to the big map and choose the second choice
+        $("#templeDestination").click(function () {
+            var audioFifth = new Audio("Sounds/Temple.mp3");
+            $(audioFifth).animate({ volume: 0 });
+            audioFifth.play();
+            $(audioFifth).animate({ volume: 0.6 }, 2000);
+            deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
+            if (destinationWent == 0) {
+                $("#templeDayE").fadeIn(3000);
+                destination = 1;
+            } else if (destination == 1) {
+                $("#templeSunsetE").fadeIn(3000);
+            };
+            $('#enterTemple').fadeIn(3000);
+            $('#enterTemple').click(function () {
 
+            });
         });
-    });
+    };
 });
 
 function guestConversation(beginningLine) {
