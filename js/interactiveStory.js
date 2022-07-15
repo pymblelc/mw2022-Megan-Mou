@@ -144,7 +144,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                 };
                 if (hideCharacter == extraTrigger) {
                     var hideWhat = '#' + hide;
-                    $(hideWhat).fadeOut(time * 2);
+                    $(hideWhat).fadeOut(time);
                 };
                 if (trigger == 9) {
                     console.log('DELETTTEEEEE!!!!');
@@ -273,13 +273,33 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     $(audioFourth).animate({ volume: 0 }, 12500);
                 } else if (trigger == 24) {
                     if (numberChoices == 0) {
-                        $('#characterE').fadeOut(800);
-                        $('#textBox').fadeOut(800);
+                        $('#characterE').fadeOut(1600);
+                        $('#textBox').fadeOut(1600);
                         setTimeout(function () {
                             $(audioFile).animate({ volume: 0 });
                             console.log('Minimised volume');
                         }, 6000);
                     }
+                } else if (trigger == 25) {
+                    if (numberChoices == 0) {
+                       //yChoice = 2;
+                        setTimeout(function () { $(audioFile).animate({ volume: 0 }) }, 800);
+                    };
+                } else if (trigger == 26) {
+                    if (numberChoices == 0) {
+                        $('#textBox').fadeOut(time);
+                        $('#transparentBackground').fadeOut(0);
+                        guestConversation(27)
+                    };
+                } else if (trigger == 28) {
+                    $('#privateRoom').fadeIn(3000);
+                    // $('#secondFloorEE').fadeOut(6000);
+                }else if (trigger == 34) {
+                    if (numberChoices == 1) {
+                        $('#textBox').fadeOut(time);
+                        $('#roomE').fadeOut(time);
+                        $('#transparentBackground').fadeOut(0);
+                    };
                 };
             });
         };
@@ -886,8 +906,9 @@ getCharacter(url, apikey, 4);
 getCharacter(url, apikey, 5);
 var destinationWent = 0;
 var firstTime = 0;
-var yChoice = 0;
+var yChoice = '';
 var audioFourth = new Audio("Sounds/Zhaoge.mp3");
+var choosingBackground = 0;
 
 function audioGlobal(ID, file, control) {
     var ID = new Audio(file);
@@ -924,9 +945,8 @@ $("#confirmSelection").click(function () {
                 }, 5000);
             };
             $("#teaHouseDestination").click(function () {
-                ;
                 $("#teaHouseDestination").fadeOut(800);
-                $("#storeE").fadeIn(3000);
+                $("#storeEE").fadeIn(3000);
                 setTimeout(function () {
                     $('#transparentBackground').fadeIn(0);
                     hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment. The private room upstairs is ready for use at any time. I will just tell the manager of any dietetic restraints.', 'Maid');
@@ -940,6 +960,7 @@ $("#confirmSelection").click(function () {
                             numberChoices = 1;
                             deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
                             hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
+                            setTimeout(function () { yChoice = 0 }, 800);
                             if (yChoice == 0) {
                                 $('#transparentBackground').on('click', function () {
                                     if (yChoice == 0) {
@@ -952,14 +973,25 @@ $("#confirmSelection").click(function () {
                         };
                     });
                     $("#secondChoice").click(function () {
+                        setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 3000);
                         $('#transparentBackground').fadeIn(0);
+                        yChoice = 2;
                         if (hoverOver == 5) {
-                            hoverOver = 6;
                             deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
                             hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You gently lowered your eyes and walked up the stairs towards the second floor.");
-                            nextLine(24, '', 'backgroundInformation', 800, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
-                            nextLine(25);
-                        }
+                            console.log('Activated bgm');
+                            nextLine(24, '', 'backgroundInformation', 1600, undefined, '', undefined, 2, undefined, undefined, 24, 'Walking');
+                            nextLine(25, '', 'backgroundInformation', 1600, 'characterTitle', "When you passed by, you seemed to hear them talking about you. But the next moment, it seemed as if they didn't. Though it doesn't really matter anymore.<br>You continued walking up without any pause.", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+                            nextLine(26, '', 'backgroundInformation', 800, 'characterTitle', '');
+                            hoverOver = 6;
+                            // if (yChoice == 1) {
+                            //     yChoice = 2;
+                            //     hoverOver = 6;
+                            //     $('#transparentBackground').on('click', function () {
+                            //         guestConversation(26);
+                            //     });
+                            // };
+                        };
                     });
                 }, 3000);
             });
@@ -987,12 +1019,12 @@ $("#confirmSelection").click(function () {
 
 function guestConversation(beginningLine) {
     //Creating a parameter to determine the beginning trigger for the conversation does not work - could not code the trigger to automatically update by one & beginningLine + 1, beginningLine + 2 does not work
-    $('#characterE').fadeOut(2400);
-    //console.log("I'm heeerrrrreeeee");
-    $("#roomE").fadeIn(3000);
     if (hoverOver == 6) {
         hoverOver = 7;
         if (yChoice == 1) {
+            $('#characterE').fadeOut(2400);
+            //console.log("I'm heeerrrrreeeee");
+            $("#roomE").fadeIn(3000);
             hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) Isn't that Miss Xiao? She generally doesn’t accept any invitations to social events and there is no easy way to see her. I guess we<br>were quite fortunate today.", 'Male Guest One');
             nextLine(beginningLine, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'It is said that she had just been ranked as the most talented lady of Zhaoge recently. Her number of votes is far beyond other ladies.', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
             nextLine((beginningLine + 1), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
@@ -1004,8 +1036,24 @@ function guestConversation(beginningLine) {
             nextLine((beginningLine + 7), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', "Don’t say it like this, if someone who cares listened, you’d be attacked by her crazy admirers.", 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
             nextLine((beginningLine + 8), 'Female Guest Two', 'backgroundInformation', 800, 'characterTitle', "(Continuing on her embroidery) So the truth can’t even be told? I wonder why those young talents fancied her, even the ones above.", 1, undefined, 'characterL', 0, (beginningLine + 8), 'Irritated', undefined, 0, 'characterH');
             nextLine((beginningLine + 9), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', '(Pursing her lips and smiled) Who knows.', 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
-        } else {
-            hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) ...Miss Xiao? She...invitations to...events...no easy way to see...quite fortunate...", 'Male Guest One');
+            nextLine((beginningLine + 10), '', 'backgroundInformation', 1600, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterH');
+            $('#storeEE').on('mouseover', function () {
+                hover('#characterE', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, 'Your breath paused for moment...', '');
+                console.log('You should appear...');
+                $('#transparentBackground').fadeIn(0);
+            });
+            nextLine((beginningLine + 11), 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss...is there anything wrong? Why are you...still standing here?', 1, undefined, 'characterI', 0, (beginningLine + 11), 'Sand', undefined, 0, 'characterE');
+            nextLine((beginningLine + 12), 'You', 'backgroundInformation', 800, 'characterTitle', "(Perfunctorily) Nothing, just thinking about something.", 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
+            nextLine((beginningLine + 13), '', 'backgroundInformation', 800, 'characterTitle', "You hid your thoughts and started walking up the staircase. You've already spent enough time listening and you cannot waste more.", 1, undefined, 'characterE', 0, undefined, undefined, undefined);
+        } else if (yChoice == 2) {
+            //$('#storeEE').fadeOut(6000);
+            $('#secondFloorEE').fadeIn(3000);
+            setTimeout(function () {
+                hover('#textBox', '#characterI', undefined, 'backgroundInformation', 'characterTitle', 3000, "(Knocked on the door) Miss? Can I come in? Tea is ready.", 'Maid');
+                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 3000);
+            }, 3500);
+            nextLine(beginningLine, 'You', 'backgroundInformation', 1000, 'characterTitle', "Come in.", 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterI');
+            nextLine((beginningLine + 1), 'Maid', 'backgroundInformation', 4000, 'characterTitle', 'The cooks are preparing, dishes should be served within ten minutes.', 1, undefined, 'characterI', 0);
         };
     };
 };

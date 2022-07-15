@@ -89,6 +89,10 @@ img{
     display: none;
 }
 
+#privateRoom{
+    z-index: 110;
+}
+
 text{
     position: absolute;
     font-size: 17px;
