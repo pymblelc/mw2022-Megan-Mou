@@ -260,51 +260,112 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         $('#transparentBackground').fadeOut(2000);
                     }, 1200);
                 } else if (trigger == 22) {
-                    deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
-                    $('#transparentBackground').fadeOut(0);
+                    if (chosenStory == 1) {
+                        deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
+                        $('#transparentBackground').fadeOut(0);
+                    };
                 }
                 else if (trigger == 23) {
-                    $('#characterE').css({ 'z-index': '120', left: '55px' })
-                    $('#characterI').fadeOut(2400);
-                    $('#characterE').fadeIn(3000);
-                    $('#firstChoice').fadeIn(3600);
-                    $('#secondChoice').fadeIn(3600);
-                    $('#transparentBackground').fadeOut(0);
-                    $(audioFourth).animate({ volume: 0 }, 12500);
+                    if (chosenStory == 1) {
+                        $('#characterE').css({ 'z-index': '120', left: '55px' })
+                        $('#characterI').fadeOut(2400);
+                        $('#characterE').fadeIn(3000);
+                        $('#firstChoice').fadeIn(3600);
+                        $('#secondChoice').fadeIn(3600);
+                        $('#transparentBackground').fadeOut(0);
+                        $(audioFourth).animate({ volume: 0 }, 12500);
+                    } else if (chosenStory == 2) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        setTimeout(function () {
+                            $('#enterHall').fadeIn(time * 2);
+                        }, 1000);
+                    };
                 } else if (trigger == 24) {
-                    if (numberChoices == 0) {
-                        $('#characterE').fadeOut(1600);
-                        $('#textBox').fadeOut(1600);
+                    if (chosenStory == 1) {
+                        if (numberChoices == 0) {
+                            $('#characterE').fadeOut(1600);
+                            $('#textBox').fadeOut(1600);
+                            setTimeout(function () {
+                                $(audioFile).animate({ volume: 0 });
+                                console.log('Minimised volume');
+                            }, 6000);
+                        }
+                    };
+                } else if (trigger == 25) {
+                    if (chosenStory == 1) {
+                        if (numberChoices == 0) {
+                            //yChoice = 2;
+                            setTimeout(function () { $(audioFile).animate({ volume: 0 }) }, 800);
+                        };
+                    };
+                } else if (trigger == 26) {
+                    if (chosenStory == 1) {
+                        if (numberChoices == 0) {
+                            $('#textBox').fadeOut(time);
+                            $('#transparentBackground').fadeOut(0);
+                            guestConversation(27)
+                        };
+                    };
+                } else if (trigger == 28) {
+                    if (chosenStory == 1) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        $('#secondFloorEE').on('mouseover', function () {
+                            setTimeout(function () {
+                                hover('#privateRoom', '#characterI', '#textBox', 'backgroundInformation', 'characterTitle', 4000, '(Puts the tea aside) Miss, you sounded worrying...are you upset by the comments of the guests downstairs?', 'Maid');
+                                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 4000);
+                            }, 3000);
+                        });
+                    } else if (chosenStory == 2) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        setTimeout(function () {
+                            $('#confirmNext').fadeIn(time * 2);
+                        }, 1000);
+                    };
+                } else if (trigger == 30) {
+                    //audioGlobal('audioEighth', 'Sounds/Food.mp3', 0.35);
+                    $(audioEighth).animate({ volume: 0 }, 0);
+                    audioEighth.play();
+                    $(audioEighth).animate({ volume: 0.35 }, 3000);
+                } else if (trigger == 32) {
+                    if (chosenStory == 2) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#thirdChoice').fadeIn(800);
+                        $('#fourthChoice').fadeIn(800);
+                    };
+                } else if (trigger == 34) {
+                    if (chosenStory == 1) {
+                        if (numberChoices == 1) {
+                            $('#textBox').fadeOut(time);
+                            $('#roomE').fadeOut(time);
+                            $('#transparentBackground').fadeOut(0);
+                        };
+                    } else if (chosenStory == 2) {
                         setTimeout(function () {
                             $(audioFile).animate({ volume: 0 });
                             console.log('Minimised volume');
                         }, 6000);
-                    }
-                } else if (trigger == 25) {
-                    if (numberChoices == 0) {
-                       //yChoice = 2;
-                        setTimeout(function () { $(audioFile).animate({ volume: 0 }) }, 800);
-                    };
-                } else if (trigger == 26) {
-                    if (numberChoices == 0) {
-                        $('#textBox').fadeOut(time);
                         $('#transparentBackground').fadeOut(0);
-                        guestConversation(27)
-                    };
-                } else if (trigger == 28) {
-                    $('#transparentBackground').fadeOut(0);
-                    $('#textBox').fadeOut(time);
-                    $('#secondFloorEE').on('mouseover', function(){
-                        setTimeout(function () { 
-                            hover('#privateRoom', '#characterI', '#textBox', 'backgroundInformation', 'characterTitle', 4000, '(Puts the tea aside) Miss, you sounded worrying...are you upset by the comments of the guests downstairs?', 'Maid');
-                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 4000);
-                        }, 3000);
-                    });
-                }else if (trigger == 34) {
-                    if (numberChoices == 1) {
                         $('#textBox').fadeOut(time);
-                        $('#roomE').fadeOut(time);
+                        $('#confirmNext').fadeIn(time * 2);
+                    };
+                } else if (trigger == 36) {
+                    if (chosenStory == 2) {
+                        $('#confirmNext').css({ top: '520px', right: '80px' }, 0);
                         $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        $('#confirmNext').fadeIn(time * 2);
+                        $(audioEighth).animate({ volume: 0 }, (7000));
+                    };
+                } else if (trigger == 42) {
+                    if (chosenStory == 2) {
+                        $('#characterN').remove();
+                        $('#confirmNext').css({ top: '490px', right: '1310px' }, 0);
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        $('#confirmNext').fadeIn(time * 2);
                     };
                 };
             });
@@ -627,7 +688,7 @@ $('#startGame').click(function () {
 function hover(zero, one, two, three, four, time, text, text1) {
     var threeID = '#' + three;
     var fourID = '#' + four;
-    $('#textBox').fadeIn(800);
+    $('#textBox').fadeIn(time);
     $(zero).fadeIn(time);
     $(one).fadeIn(time);
     $(two).fadeIn(time);
@@ -914,11 +975,13 @@ var destinationWent = 0;
 var firstTime = 0;
 var yChoice = '';
 var audioFourth = new Audio("Sounds/Zhaoge.mp3");
-var choosingBackground = 0;
+var audioSeventh = new Audio("Sounds/Exploring.mp3");
+var audioEighth = new Audio("Sounds/Food.mp3");
+var sameButton = 0;
 
 function audioGlobal(ID, file, control) {
     var ID = new Audio(file);
-    $(ID).animate({ volume: 0 });
+    $(ID).animate({ volume: 0 }, 0);
     ID.play();
     $(ID).animate({ volume: control }, 3000);
 };
@@ -944,7 +1007,7 @@ $("#confirmSelection").click(function () {
                 $('#transparentBackground').fadeIn(0);
                 firstTime = 1;
                 setTimeout(function () {
-                    hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
+                    hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BCE - 1046 BCE<br>Shang Dynasty, Zhaoge');
                     //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
                     nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
                     nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
@@ -1020,6 +1083,71 @@ $("#confirmSelection").click(function () {
 
             });
         });
+    } else if (chosenStory == 2) {
+        $("#mapF").fadeIn(3000);
+        $(audioThird).animate({ volume: 0 }, 5000);
+        setTimeout(function () { $('#characterF').fadeOut() }, 5000);
+        $("#entranceDestination").fadeIn(3000);
+        $("#entranceDestination").click(function () {
+            $('#gateF').fadeIn(3000);
+            $('#entranceDestination').fadeOut(800);
+            setTimeout(function () {
+                $(audioSeventh).animate({ volume: 0 }, 0);
+                audioSeventh.play();
+                $(audioSeventh).animate({ volume: 0.4 }, 3000);
+            }, 200);
+            setTimeout(function () {
+                $('#transparentBackground').fadeIn(0);
+                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '618 CE - 907 CE<br>Shang Dynasty, Zhaoge');
+                nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Following the establishment of Tang Dynasty, as one of the two imperial capitals, Luoyang entered the peak period in the history of capital development.', 1);
+                nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', "Under the reign of Wu Zetian - China's only empress - Luoyang was named as the 'Capital of Gods'. And the flourshinment allowed Luoyang to become<br>the centre of the Oriental world.", 1);
+                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
+            }, 3000);
+            $('#enterHall').click(function () {
+                $('#meetingRoomF').fadeIn(3000);
+                $('#enterHall').fadeOut(800);
+                $('#characterF').css({ 'z-index': '120', left: '300px' });
+                hover(undefined, '#textBox', undefined, 'backgroundInformation', undefined, 3000, 'A row of young girls stood in line near the walls, waiting to welcome the guests for this annual forum.');
+                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                nextLine(24, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', '(Puts on a smile after she sees you approaching) First time seeing you here, you are Miss...', 1, undefined, 'characterN', 0);
+                nextLine(25, 'You', 'backgroundInformation', 800, 'characterTitle', 'Miss Gu is fine.', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                nextLine(26, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "(Nod) I'll just guide you around this place. Hopefully you will become familiar soon.", 1, undefined, 'characterN', 0, undefined, undefined, undefined, 0, 'characterF');
+                nextLine(27, undefined, 'backgroundInformation', 1000, undefined, 'Here is obviously the meeting room, for the next two weeks, any discussions would be held here.');
+                nextLine(28, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
+                $('#confirmNext').click(function () {
+                    $('#transparentBackground').fadeOut(0);
+                    $('#confirmNext').fadeOut(800);
+                    $(audioSeventh).animate({ volume: 0 }, (11500));
+                    $('#gardenF').fadeIn(3000);
+                    setTimeout(function () {
+                        hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is the garden, or you could call it pond if you like. Our master preferred water elements.', 'Young Girl');
+                        setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1000);
+                        nextLine(29, undefined, 'backgroundInformation', 800, 'characterTitle', "Following this path down all the way to the end, you'll see the kitchen on the right. If you have any eating habits, inform them there.");
+                        nextLine(30, '', 'backgroundInformation', 800, 'characterTitle', 'Your eyes lit up, if the kitchen is there...does that mean you could go at anytime to seek for food?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                        nextLine(31, undefined, 'backgroundInformation', 800, undefined, 'But you are not sure if they only provided proper meals...and...you looked at the young girl in front of you in a hidden manner. Something tells you that you<br>better not ask directly.');
+                        nextLine(32, undefined, 'backgroundInformation', 800, undefined, 'Do you want to sneak in at night and have a look?');
+                        $('#thirdChoice').click(function () {
+                            console.log('selected first choice');
+                            $('#transparentBackground').fadeIn(0);
+                            updateArray(2);
+                            deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Making your decision, you cheerfully followed the young girl.");
+                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, "She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried to disregard this thought.Why did I think<br>of this?");
+                            secondCharacter();
+                        });
+                        $('#fourthChoice').click(function () {
+                            $('#transparentBackground').fadeIn(0);
+                            deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Even though you know that a proper lady should do this but...do you really care?");
+                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, 'Following the young girl, you wondered. She seems a little unattentive...gazing across as if seeking for a way<br>to escape...shaking your head, you tried to disregard this thought. Why did I think of this?');
+                            secondCharacter();
+                        });
+                    }, 4000);
+                });
+            });
+        });
     };
 });
 
@@ -1058,16 +1186,74 @@ function guestConversation(beginningLine) {
                 setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 3000);
             }, 3500);
             nextLine(beginningLine, 'You', 'backgroundInformation', 1000, 'characterTitle', "Come in.", 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterI');
-            nextLine((beginningLine + 1), '', 'backgroundInformation', 1000, 'characterTitle', '');
-            nextLine((beginningLine + 2), 'You', 'backgroundInformation', 800, 'characterTitle', '(Shaking head slightly) Why would you say this?', 1, undefined, 'characterE', 0);
+            nextLine((beginningLine + 1), '', 'backgroundInformation', 1000, 'characterTitle', '', 1);
+            nextLine((beginningLine + 2), 'You', 'backgroundInformation', 800, 'characterTitle', '(Shaking head slightly) Why would you say this?', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
             nextLine((beginningLine + 3), 'Maid', 'backgroundInformation', 800, 'characterTitle', "I just thought that most of the noble ladies in Zhaoge disliked you out of jealousy, but most of the young talents praised you. Miss<br>were often distanced out from them, I'm scared you will take it too seriously.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
             nextLine((beginningLine + 4), 'You', 'backgroundInformation', 800, 'characterTitle', "I'm used to it, don't worry. It's only a few words.", 1, undefined, 'characterE', 0, (beginningLine + 4), 'Sighing', undefined, 0, 'characterI');
             nextLine((beginningLine + 5), undefined, 'backgroundInformation', 800, undefined, 'By the way, did father accept the invitations?');
             nextLine((beginningLine + 6), 'Maid', 'backgroundInformation', 800, 'characterTitle', "(Anxious)...He accepted the invitations from the ones above...it's two days later.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
-            nextLine((beginningLine + 7), 'You', 'backgroundInformation', 800, 'characterTitle', '(Looking away) Hope that after father receives the recognition he wants this time, he would give me some days to rest.', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
-            nextLine((beginningLine + 8), '', 'backgroundInformation', 800, 'characterTitle', 'Looking deeply in her direction, the maid silenced. She knows Miss has been used as a tool to maintain political power...but she sincerely hopes that one day this<br>would change...', 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            nextLine((beginningLine + 7), 'You', 'backgroundInformation', 800, 'characterTitle', '(Looking away) Hope that after father receives the recognition he wants this time, I could have some days off.', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
+            nextLine((beginningLine + 8), '', 'backgroundInformation', 800, 'characterTitle', 'Looking deeply in her direction, the maid silenced. She knows Miss has been used as a tool to maintain political power...but she sincerely hopes that one day<br>this would change...', 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            //Should end all short sections with a conclusion - if there is time to code a function to do this
         };
     };
+};
+
+function secondCharacter() {
+    $('#confirmNext').css({ top: '122px', right: '130px', 'z-index': '125' }, 0);
+    nextLine(34, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, 34, 'Walking', undefined, 0, 'characterF');
+    $('#confirmNext').click(function () {
+        $('#confirmNext').fadeOut(800);
+        $('#martialF').fadeIn(3000);
+        setTimeout(function () {
+            hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is the training area designed for martial arts.', 'Young Girl');
+            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+            nextLine(35, undefined, 'backgroundInformation', 800, undefined, '(Scanning you from head to toe) I heard that you enjoyed practicing, I suppose this will be your usual place to go to.');
+            nextLine(36, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
+            if (sameButton == 0) {
+                $('#confirmNext').click(function () {
+                    sameButton = 1;
+                    $('#confirmNext').fadeOut(800);
+                    $('#courtyardF').fadeIn(3000);
+                    setTimeout(function () {
+                        setTimeout(function () {
+                            audioGlobal('audioNineth', 'Sounds/Confronting.mp3', 0.4);
+                            // $(audioNineth).animate({ volume: 0 }, 0);
+                            // audioNineth.play();
+                            // $(audioNineth).animate({ volume: 0.4 }, 3000);
+                        }, 200);
+                        hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is where you will be staying for the two weeks.', 'Young Girl');
+                        setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                        nextLine(37, undefined, 'backgroundInformation', 800, undefined, "Quite quiet right? This place is specifically isolated out for female guests. We do believe that it's better to keep clear of male guests. Just so rumours<br>that further hurts your reputation would't spread.");
+                        nextLine(38, 'You', 'backgroundInformation', 800, 'characterTitle', 'Further hurt...my reputation?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                        nextLine(39, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "Miss, don't tell me you don't know how the outer world talks of you.", 1, undefined, 'characterN', 0, 39, 'Smiling', undefined, 0, 'characterF');
+                        nextLine(40, undefined, 'backgroundInformation', 1000, undefined, "(Looking at the sky) Unfortunately, I need to go welcome other guests, so I'll just leave you here.");
+                        nextLine(41, undefined, 'backgroundInformation', 1200, undefined, '(Leaving) By the way, because there is only you and another, so I guess you will have a new roommate.', undefined, undefined, undefined, 0, 41, 'Sand', undefined, 0, 'characterN');
+                        nextLine(42, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
+                        if (sameButton == 1) {
+                            $('#confirmNext').click(function () {
+                                sameButton = 2;
+                                $('#confirmNext').fadeOut(800);
+                                $('#roomF').fadeIn(3000);
+                                setTimeout(function () {
+                                    hover('#characterO', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1400, 'Is it Miss Gu?', 'Roommate');
+                                    setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1400);
+                                    nextLine(43, 'You', 'backgroundInformation', 800, 'characterTitle', 'Yes, you are?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                                    nextLine(44, 'Roommate', 'backgroundInformation', 800, 'characterTitle', '(Smiling) Liu（柳）, I guess we are going to be roommates for the next two weeks.', 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
+                                    nextLine(45, 'You', 'backgroundInformation', 800, 'characterTitle', "(Curiously) No offence at all, but I was just wondering because I heard that it's supposed to be one guest one courtyard?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                                    nextLine(46, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', 'No offence taken, yes it was supposed to so but as there were more guests than expected. The master here was afraid that the male guests would feel disrespcted.<br>Comparitively, perhaps female guests would feel more used to it.', 1, undefined, 'characterO', 0, 46, 'Sighing', undefined, 0, 'characterF');
+                                    nextLine(47, 'You', 'backgroundInformation', 800, 'characterTitle', "...Are you comfortable with this?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                                    nextLine(48, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', "(Shaking her head) I'm used to it...and it's only two sharing one courtyard. Don't worry.", 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
+                                    nextLine(49, undefined, 'backgroundInformation', 800, undefined, "Come in, I'll help you tidy up.");
+                                }, 5000);
+                            });
+                        };
+                    }, 4000);
+                });
+            };
+        }, 4000);
+
+    });
 };
 
 //The code was not actually finished...
@@ -1080,7 +1266,7 @@ arrWrong = [];
 
 arrDescription = [
     { question: "Listen or not", description: "All ladies from noble families had extremely strict standards of behaviour,<br>which also includes not to listen on others' conversations without invitation." },
-    { question: "second question", description: "I don't know what to say next..." },
+    { question: "Yes or no", description: "Even though Tang Dynasty is one of the least restrictive time periods in Ancient <br>China, but such actions are still considered inappropriate. Particularly for women." },
     { question: "third question", description: "Maybe anything will do..." },
     { question: "fourth question", description: "Actually one more..." },
 ]

@@ -227,6 +227,15 @@ text{
     display: none;
 }
 
+#characterC{
+    width: 45%;
+    height: auto;
+    left: 405px;
+    bottom: 0px;
+    z-index: 30;
+    display: none;
+}
+
 #characterH{
     width: 45%;
     height: -webkit-fill-available;
@@ -271,6 +280,22 @@ text{
     display: none;
 }
 
+#characterN{
+    width: 41%;
+    left: 400px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterO{
+    width: 40%;
+    left: 370px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
 .hover-opacity {
     opacity: 50%;
     transition-duration: 1s;
@@ -278,15 +303,6 @@ text{
 
 .hover-opacity:hover {
     opacity: 100%;
-}
-
-#characterC{
-    width: 45%;
-    height: auto;
-    left: 405px;
-    bottom: 0px;
-    z-index: 30;
-    display: none;
 }
 
 #textBox{
@@ -399,6 +415,11 @@ text{
     cursor: pointer;
 }
 
+#confirmNext{
+    top: 400px;
+    right: 540px;
+}
+
 .choices{
     height: 55px;
     width: 700px;
@@ -417,6 +438,16 @@ text{
 }
 
 #secondChoice{
+    left: 385px;
+    top: 400px;
+}
+
+#thirdChoice{
+    left: 385px;
+    top: 330px;
+}
+
+#fourthChoice{
     left: 385px;
     top: 400px;
 }
@@ -462,8 +493,8 @@ text{
 }
 
 #streetDestination{
-    bottom: 180px;
     right: 840px;
+    bottom: 180px;
 }
 
 #templeDestination{
@@ -476,7 +507,17 @@ text{
     top: 200px;
 }
 
+#entranceDestination{
+    top: 142px;
+    left: 259px;
+}
+
 #enterTemple{
     left: 669px;
     bottom: 10px;
+}
+
+#enterHall{
+    top: 480px;
+    left: 670px;
 }
