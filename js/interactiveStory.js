@@ -292,8 +292,14 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         guestConversation(27)
                     };
                 } else if (trigger == 28) {
-                    $('#privateRoom').fadeIn(3000);
-                    // $('#secondFloorEE').fadeOut(6000);
+                    $('#transparentBackground').fadeOut(0);
+                    $('#textBox').fadeOut(time);
+                    $('#secondFloorEE').on('mouseover', function(){
+                        setTimeout(function () { 
+                            hover('#privateRoom', '#characterI', '#textBox', 'backgroundInformation', 'characterTitle', 4000, '(Puts the tea aside) Miss, you sounded worrying...are you upset by the comments of the guests downstairs?', 'Maid');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 4000);
+                        }, 3000);
+                    });
                 }else if (trigger == 34) {
                     if (numberChoices == 1) {
                         $('#textBox').fadeOut(time);
@@ -1046,14 +1052,20 @@ function guestConversation(beginningLine) {
             nextLine((beginningLine + 12), 'You', 'backgroundInformation', 800, 'characterTitle', "(Perfunctorily) Nothing, just thinking about something.", 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
             nextLine((beginningLine + 13), '', 'backgroundInformation', 800, 'characterTitle', "You hid your thoughts and started walking up the staircase. You've already spent enough time listening and you cannot waste more.", 1, undefined, 'characterE', 0, undefined, undefined, undefined);
         } else if (yChoice == 2) {
-            //$('#storeEE').fadeOut(6000);
             $('#secondFloorEE').fadeIn(3000);
             setTimeout(function () {
                 hover('#textBox', '#characterI', undefined, 'backgroundInformation', 'characterTitle', 3000, "(Knocked on the door) Miss? Can I come in? Tea is ready.", 'Maid');
                 setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 3000);
             }, 3500);
             nextLine(beginningLine, 'You', 'backgroundInformation', 1000, 'characterTitle', "Come in.", 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterI');
-            nextLine((beginningLine + 1), 'Maid', 'backgroundInformation', 4000, 'characterTitle', 'The cooks are preparing, dishes should be served within ten minutes.', 1, undefined, 'characterI', 0);
+            nextLine((beginningLine + 1), '', 'backgroundInformation', 1000, 'characterTitle', '');
+            nextLine((beginningLine + 2), 'You', 'backgroundInformation', 800, 'characterTitle', '(Shaking head slightly) Why would you say this?', 1, undefined, 'characterE', 0);
+            nextLine((beginningLine + 3), 'Maid', 'backgroundInformation', 800, 'characterTitle', "I just thought that most of the noble ladies in Zhaoge disliked you out of jealousy, but most of the young talents praised you. Miss<br>were often distanced out from them, I'm scared you will take it too seriously.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            nextLine((beginningLine + 4), 'You', 'backgroundInformation', 800, 'characterTitle', "I'm used to it, don't worry. It's only a few words.", 1, undefined, 'characterE', 0, (beginningLine + 4), 'Sighing', undefined, 0, 'characterI');
+            nextLine((beginningLine + 5), undefined, 'backgroundInformation', 800, undefined, 'By the way, did father accept the invitations?');
+            nextLine((beginningLine + 6), 'Maid', 'backgroundInformation', 800, 'characterTitle', "(Anxious)...He accepted the invitations from the ones above...it's two days later.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            nextLine((beginningLine + 7), 'You', 'backgroundInformation', 800, 'characterTitle', '(Looking away) Hope that after father receives the recognition he wants this time, he would give me some days to rest.', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
+            nextLine((beginningLine + 8), '', 'backgroundInformation', 800, 'characterTitle', 'Looking deeply in her direction, the maid silenced. She knows Miss has been used as a tool to maintain political power...but she sincerely hopes that one day this<br>would change...', 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
         };
     };
 };
