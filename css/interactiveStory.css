@@ -296,6 +296,46 @@ text{
     display: none;
 }
 
+#characterP{
+    width: 44%;
+    left: 350px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterQ{
+    width: 47%;
+    left: 380px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterR{
+    width: 40%;
+    left: 490px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterS{
+    width: 43%;
+    left: 422px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterT{
+    width: 46%;
+    left: 385px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
 .hover-opacity {
     opacity: 50%;
     transition-duration: 1s;
@@ -502,6 +542,11 @@ text{
     left: 100px;
 }
 
+#marketDestination{
+    left: 670px;
+    bottom: 290px;
+}
+
 #teaHouseDestination{
     right: 200px;
     top: 200px;
@@ -520,4 +565,19 @@ text{
 #enterHall{
     top: 480px;
     left: 670px;
+}
+
+#enterRestaurant{
+    left: 640px;
+    bottom: 300px;
+}
+
+#enterRoom{
+    left: 525px;
+    bottom: 295px;
+}
+
+#windowSide{
+    left: 165px;
+    bottom: 290px;
 }

@@ -263,6 +263,9 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     if (chosenStory == 1) {
                         deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
                         $('#transparentBackground').fadeOut(0);
+                        setTimeout(function () {
+                            $('#teaHouseDestination').fadeIn(time * 2);
+                        }, 1000);
                     };
                 }
                 else if (trigger == 23) {
@@ -279,6 +282,12 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         $('#textBox').fadeOut(time);
                         setTimeout(function () {
                             $('#enterHall').fadeIn(time * 2);
+                        }, 1000);
+                    } else if (chosenStory == 3){
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        setTimeout(function () {
+                            $('#enterRestaurant').fadeIn(time * 2);
                         }, 1000);
                     };
                 } else if (trigger == 24) {
@@ -361,11 +370,11 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     };
                 } else if (trigger == 42) {
                     if (chosenStory == 2) {
-                        $('#characterN').remove();
-                        $('#confirmNext').css({ top: '490px', right: '1310px' }, 0);
+                        //$('#characterN').remove();
+                        $('#confirmLast').css({ top: '490px', right: '1310px' }, 0);
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
-                        $('#confirmNext').fadeIn(time * 2);
+                        $('#confirmLast').fadeIn(time * 2);
                     };
                 };
             });
@@ -977,6 +986,7 @@ var yChoice = '';
 var audioFourth = new Audio("Sounds/Zhaoge.mp3");
 var audioSeventh = new Audio("Sounds/Exploring.mp3");
 var audioEighth = new Audio("Sounds/Food.mp3");
+var audioTenth = new Audio("Sounds/Changan.mp3");
 var sameButton = 0;
 
 function audioGlobal(ID, file, control) {
@@ -1002,7 +1012,7 @@ $("#confirmSelection").click(function () {
             audioFourth.play();
             $(audioFourth).animate({ volume: 0.35 }, 2000);
             deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-            $("#teaHouseDestination").fadeIn(3000);
+            //$("#teaHouseDestination").fadeIn(3000);
             if (firstTime == 0) {
                 $('#transparentBackground').fadeIn(0);
                 firstTime = 1;
@@ -1098,7 +1108,7 @@ $("#confirmSelection").click(function () {
             }, 200);
             setTimeout(function () {
                 $('#transparentBackground').fadeIn(0);
-                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '618 CE - 907 CE<br>Shang Dynasty, Zhaoge');
+                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '618 CE - 907 CE<br>Tang Dynasty, Luoyang');
                 nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Following the establishment of Tang Dynasty, as one of the two imperial capitals, Luoyang entered the peak period in the history of capital development.', 1);
                 nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', "Under the reign of Wu Zetian - China's only empress - Luoyang was named as the 'Capital of Gods'. And the flourshinment allowed Luoyang to become<br>the centre of the Oriental world.", 1);
                 nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
@@ -1141,11 +1151,53 @@ $("#confirmSelection").click(function () {
                             deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
                             setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
                             hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Even though you know that a proper lady should do this but...do you really care?");
-                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, 'Following the young girl, you wondered. She seems a little unattentive...gazing across as if seeking for a way<br>to escape...shaking your head, you tried to disregard this thought. Why did I think of this?');
+                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, 'Following the young girl, you wondered. She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried<br>to disregard this thought. Why did I think of this?');
                             secondCharacter();
                         });
                     }, 4000);
                 });
+            });
+        });
+    } else if (chosenStory == 3){
+        $("#mapG").fadeIn(3000);
+        $(audioThird).animate({ volume: 0 }, 5000);
+        setTimeout(function () { $('#characterG').fadeOut() }, 5000);
+        $('#marketDestination').fadeIn(3000);
+        $('#marketDestination').click(function (){
+            $('#streetG').fadeIn(3000);
+            $('#marketDestination').fadeOut(800);
+            setTimeout(function () {
+                $(audioTenth).animate({ volume: 0 }, 0);
+                audioTenth.play();
+                $(audioTenth).animate({ volume: 0.4 }, 3000);
+            }, 200);
+            setTimeout(function () {
+                $('#transparentBackground').fadeIn(0);
+                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '618 CE - 907 CE<br>Tang Dynasty, Changan');
+                nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Being the ancient capital of thirteen dynasties, Changan has long been the imperial capital of China.', 1);
+                nextLine(22, undefined, 'backgroundInformation', 800, undefined, 'And as the starting point of the Silk Road, Changan signified the prosperity of ancient China.');
+                nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
+            }, 3000);
+            $('#enterRestaurant').click(function (){
+                $('#doorG').fadeIn(3000);
+                $('#enterRestaurant').fadeOut(800);
+                setTimeout(function () {
+                    $('#enterRoom').fadeIn(800 * 2);
+                    $('#enterRoom').click(function (){
+                        $('#roomG').fadeIn(3000);
+                        $('#enterRoom').fadeOut(800);
+                        setTimeout(function () {
+                            $('#windowSide').fadeIn(800 * 2);
+                            $('#windowSide').click(function (){
+                                $('#windowG').fadeIn(3000);
+                                $('#windowSide').fadeOut(800);
+                                setTimeout(function (){
+                                    hover('#characterG', '#textBox', undefined, 'backgroundInformation', undefined, 1200, 'Tapping on the wooden balcony fencing, you looked down towards the entrance. There seems to be a sort of quarrel going down there...');
+                                }, 3000);
+                            });
+                        }, 3000);
+                    });
+                }, 3000);
             });
         });
     };
@@ -1200,7 +1252,7 @@ function guestConversation(beginningLine) {
 };
 
 function secondCharacter() {
-    $('#confirmNext').css({ top: '122px', right: '130px', 'z-index': '125' }, 0);
+    $('#confirmNext').css({ top: '202px', right: '130px', 'z-index': '125' }, 0);
     nextLine(34, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, 34, 'Walking', undefined, 0, 'characterF');
     $('#confirmNext').click(function () {
         $('#confirmNext').fadeOut(800);
@@ -1210,9 +1262,9 @@ function secondCharacter() {
             setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
             nextLine(35, undefined, 'backgroundInformation', 800, undefined, '(Scanning you from head to toe) I heard that you enjoyed practicing, I suppose this will be your usual place to go to.');
             nextLine(36, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
-            if (sameButton == 0) {
+            //if (sameButton == 0) {
                 $('#confirmNext').click(function () {
-                    sameButton = 1;
+                    //sameButton = 1;
                     $('#confirmNext').fadeOut(800);
                     $('#courtyardF').fadeIn(3000);
                     setTimeout(function () {
@@ -1230,10 +1282,10 @@ function secondCharacter() {
                         nextLine(40, undefined, 'backgroundInformation', 1000, undefined, "(Looking at the sky) Unfortunately, I need to go welcome other guests, so I'll just leave you here.");
                         nextLine(41, undefined, 'backgroundInformation', 1200, undefined, '(Leaving) By the way, because there is only you and another, so I guess you will have a new roommate.', undefined, undefined, undefined, 0, 41, 'Sand', undefined, 0, 'characterN');
                         nextLine(42, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
-                        if (sameButton == 1) {
-                            $('#confirmNext').click(function () {
-                                sameButton = 2;
-                                $('#confirmNext').fadeOut(800);
+                        //if (sameButton == 1) {
+                            $('#confirmLast').click(function () {
+                                //sameButton = 2;
+                                $('#confirmLast').fadeOut(800);
                                 $('#roomF').fadeIn(3000);
                                 setTimeout(function () {
                                     hover('#characterO', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1400, 'Is it Miss Gu?', 'Roommate');
@@ -1245,12 +1297,13 @@ function secondCharacter() {
                                     nextLine(47, 'You', 'backgroundInformation', 800, 'characterTitle', "...Are you comfortable with this?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
                                     nextLine(48, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', "(Shaking her head) I'm used to it...and it's only two sharing one courtyard. Don't worry.", 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
                                     nextLine(49, undefined, 'backgroundInformation', 800, undefined, "Come in, I'll help you tidy up.");
+                                    nextLine(50, '', 'backgroundInformation', 800, 'characterTitle', 'You nodded and followed her in, but something kept on ringing in the back of your mind...Did you forget something?');
                                 }, 5000);
                             });
-                        };
+                        //};
                     }, 4000);
                 });
-            };
+            //};
         }, 4000);
 
     });
