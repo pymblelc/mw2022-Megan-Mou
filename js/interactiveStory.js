@@ -3,7 +3,7 @@ var alreadyPlayed = 0;
 var audioFirst = new Audio("Sounds/Melancholy.mp3");
 $(audioFirst).animate({ volume: 0 });
 
-
+//First time when user clicks on webpage
 $('body').on('click', function () {
     if (alreadyPlayed == 0) {
         audioFirst.play();
@@ -14,6 +14,7 @@ $('body').on('click', function () {
     };
 });
 
+//Variables
 var alreadyExist = 0;
 var timeControl = 0;
 var timeManage = 0;
@@ -22,6 +23,7 @@ var characterDisappear = 1;
 var nextSceneControl = 1;
 var count = 0;
 var audioSecond = '';
+var audioThird = '';
 var timeCount = 0;
 var numberCount = 1;
 var numberCount2 = 0;
@@ -100,8 +102,6 @@ function callCover(wordID, secondNumberID) {
     };
 };
 
-var audioThird = '';
-
 //Function for calling the next line of the plot
 function nextLine(trigger, name, ID, time, title, text, characterVisible, characterHidden, characterID, extraTrigger, bonusTrigger, fileName, contextBackground, hideCharacter, hide) {
     var restriction = "#" + ID;
@@ -146,6 +146,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     var hideWhat = '#' + hide;
                     $(hideWhat).fadeOut(time);
                 };
+                //From below - specific code only triggered when the trigger is correct
                 if (trigger == 9) {
                     console.log('DELETTTEEEEE!!!!');
                     console.log('The next scene is scene: ' + nextSceneControl);
@@ -163,48 +164,34 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     nextSceneControl = nextSceneControl + 1;
                 } else if (trigger == 12) {
                     if (inspection == 0) {
-                        $('transparentBackground').fadeOut(0);
                         $('#desk').fadeIn(1600);
                         $('#inspecting').fadeIn(1600);
                         $('#redJadeite').fadeIn(1600);
                         console.log('The time count is: ' + time);
                         inspection = 1;
                         console.log(inspection);
-                        setTimeout(function () {
-                            animationControl = 1;
-                            $('transparentBackground').fadeIn(0);
-                        }, 1600);
                     };
                 } else if (trigger == 13) {
-                    $('transparentBackground').fadeOut(0);
-                    //if(animationControl == 1){
+                    $('#transparentBackground').fadeOut(0);
                     $('#inspecting').animate({ left: '250px', bottom: '80px' }, 1600);
                     console.log('Successful animation');
                     setTimeout(function () {
-                        animationControl = 2;
-                        $('transparentBackground').fadeIn(0);
+                        $('#transparentBackground').fadeIn(0);
                     }, 1600);
-                    //};
                     console.log("1: Haven't finished animation yet");
                 } else if (trigger == 14) {
-                    $('transparentBackground').fadeOut(0);
-                    //if(animationControl == 2){
+                    $('#transparentBackground').fadeOut(0);
                     $('#inspecting').animate({ width: '75%', bottom: '20px', left: '237px' }, 2000);
                     $('#redJadeite').animate({ width: '20%' }, 2000);
                     setTimeout(function () {
-                        animationControl = 3;
-                        $('transparentBackground').fadeIn(0);
+                        $('#transparentBackground').fadeIn(0);
                     }, 2000);
-                    //};
                     console.log("2: Haven't finished animation yet");
                 } else if (trigger == 15) {
-                    // $('transparentBackground').fadeOut(0);
-                    //if(animationControl == 3){
                     $('#desk').fadeOut(800);
                     $('#inspecting').fadeOut(800);
                     $('#redJadeite').fadeOut(800);
                     setTimeout(function () { deleteElements('desk'); }, 800);
-                    //};
                     console.log("3: Haven't finished animation yet");
                 } else if (trigger == 18) {
                     $('#characterC').fadeOut(2400);
@@ -236,19 +223,18 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                                 $(audioThird).animate({ volume: 0.55 }, 2000)
                             }, 6500);
                             setTimeout(function () {
-                                callCover('studyThird', 'studyFourth')
                                 inspection = 3;
+                                callCover('studyThird', 'studyFourth')
+                                setTimeout(function () {
+                                    hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
+                                    setTimeout(function () { $('#backUp').fadeOut(0) }, 1600);
+                                }, 5000);
                             }, 12000);
                             $('#inspecting').css({ bottom: '90px' });
                             $('#redJadeite').css({ top: '180px', width: '18%' });
                         };
                     };
-                    //} else if (trigger == 20) {
-                    //     $('#inspecting').fadeIn(800 * 2);
-                    //     $('#redJadeite').fadeIn(800 * 2);
-                    //     $('#characterA').fadeIn(800);
-                    //     $('#textBox').fadeIn(800);
-                } else if (trigger == 20 && hoverOver == 4) {
+                } else if (trigger == 20) {
                     hoverOver = 5;
                     setTimeout(function () {
                         deleteElements(undefined, undefined, undefined, undefined, "characterA", "textBox")
@@ -283,7 +269,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         setTimeout(function () {
                             $('#enterHall').fadeIn(time * 2);
                         }, 1000);
-                    } else if (chosenStory == 3){
+                    } else if (chosenStory == 3) {
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
                         setTimeout(function () {
@@ -300,13 +286,28 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                                 console.log('Minimised volume');
                             }, 6000);
                         }
+                    } else if (chosenStory == 3) {
+                        $('#textBox').fadeOut(1200);
+                        setTimeout(function () {
+                            $('#doorG').fadeIn(3000);
+                            $('#transparentBackground').fadeOut(0);
+                            setTimeout(function () {
+                                hover('#characterQ', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, '(Escapes from the grasp of the maid) Why is it when male guests enter a tavern, it was accepted and when a female does the same, they are considered amoral?', 'Noble Lady');
+                                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                            }, 3000);
+                        }, 1300);
                     };
                 } else if (trigger == 25) {
                     if (chosenStory == 1) {
                         if (numberChoices == 0) {
-                            //yChoice = 2;
                             setTimeout(function () { $(audioFile).animate({ volume: 0 }) }, 800);
                         };
+                    } else if (chosenStory == 3) {
+                        //audioGlobal('audioTwelveth', 'Sounds/Comparison.mp3', 0.55);
+                        audioTwelveth = new Audio('Sounds/Comparison.mp3');
+                        $(audioTwelveth).animate({ volume: 0 }, 0);
+                        audioTwelveth.play();
+                        $(audioTwelveth).animate({ volume: 0.55 }, 3000);
                     };
                 } else if (trigger == 26) {
                     if (chosenStory == 1) {
@@ -318,14 +319,19 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     };
                 } else if (trigger == 28) {
                     if (chosenStory == 1) {
-                        $('#transparentBackground').fadeOut(0);
-                        $('#textBox').fadeOut(time);
-                        $('#secondFloorEE').on('mouseover', function () {
-                            setTimeout(function () {
-                                hover('#privateRoom', '#characterI', '#textBox', 'backgroundInformation', 'characterTitle', 4000, '(Puts the tea aside) Miss, you sounded worrying...are you upset by the comments of the guests downstairs?', 'Maid');
-                                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 4000);
-                            }, 3000);
-                        });
+                        if (numberChoices == 0) {
+                            $('#transparentBackground').fadeOut(0);
+                            $('#textBox').fadeOut(time);
+                            $('#secondFloorEE').on('mouseover', function () {
+                                setTimeout(function () {
+                                    $('#privateRoom').fadeIn(3000);
+                                    setTimeout(function () {
+                                        hover(undefined, '#characterI', '#textBox', 'backgroundInformation', 'characterTitle', 3000, '(Puts the tea aside) Miss, you sounded worrying...are you upset by the comments of the guests downstairs?', 'Maid');
+                                        setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 3000);
+                                    }, 3000);
+                                }, 1600);
+                            });
+                        };
                     } else if (chosenStory == 2) {
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
@@ -334,15 +340,35 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         }, 1000);
                     };
                 } else if (trigger == 30) {
-                    //audioGlobal('audioEighth', 'Sounds/Food.mp3', 0.35);
-                    $(audioEighth).animate({ volume: 0 }, 0);
-                    audioEighth.play();
-                    $(audioEighth).animate({ volume: 0.35 }, 3000);
+                    if (chosenStory == 2) {
+                        //audioGlobal('audioEighth', 'Sounds/Food.mp3', 0.35);
+                        $(audioEighth).animate({ volume: 0 }, 0);
+                        audioEighth.play();
+                        $(audioEighth).animate({ volume: 0.35 }, 3000);
+                    };
+                } else if (trigger == 31) {
+                    if (chosenStory == 3) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        $('#doorG').fadeOut(4000);
+                        setTimeout(function () {
+                            hover('#characterG', '#textBox', undefined, 'backgroundInformation', undefined, 1200, "You didn't keep on listening, turned and went back into the room.");
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                        }, 5000);
+                    };
                 } else if (trigger == 32) {
                     if (chosenStory == 2) {
                         $('#transparentBackground').fadeOut(0);
                         $('#thirdChoice').fadeIn(800);
                         $('#fourthChoice').fadeIn(800);
+                    } else if (chosenStory == 3) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#textBox').fadeOut(time);
+                        $('#windowG').fadeOut(3000);
+                        setTimeout(function () {
+                            hover('#characterR', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, "(Looks at you) It seems that something interesting is happening down there, isn't it?", 'Male Guest One');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                        }, 4000);
                     };
                 } else if (trigger == 34) {
                     if (chosenStory == 1) {
@@ -361,24 +387,50 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         $('#confirmNext').fadeIn(time * 2);
                     };
                 } else if (trigger == 36) {
-                    if (chosenStory == 2) {
+                    if (chosenStory == 1 && numberChoices == 0) {
+                        $('#textBox').fadeOut(time);
+                        $(audioSixth).animate({ volume: 0 }, 3500);
+                        setTimeout(function () { conclusion() }, (time + 200));
+                    } else if (chosenStory == 2) {
                         $('#confirmNext').css({ top: '520px', right: '80px' }, 0);
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
                         $('#confirmNext').fadeIn(time * 2);
                         $(audioEighth).animate({ volume: 0 }, (7000));
                     };
+                } else if (trigger == 38) {
+                    if (chosenStory == 1 && numberChoices == 1) {
+                        $('#textBox').fadeOut(time);
+                        $(audioSixth).animate({ volume: 0 }, 3500);
+                        setTimeout(function () { conclusion() }, (time + 200));
+                    };
+                } else if (trigger == 39) {
+                    if (chosenStory == 3) {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#fifthChoice').fadeIn(800);
+                        $('#sixthChoice').fadeIn(800);
+                    };
                 } else if (trigger == 42) {
                     if (chosenStory == 2) {
-                        //$('#characterN').remove();
                         $('#confirmLast').css({ top: '490px', right: '1310px' }, 0);
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
                         $('#confirmLast').fadeIn(time * 2);
+                    } else if (chosenStory == 3) {
+                        $('#textBox').fadeOut(time);
+                        $(audioTwelveth).animate({ volume: 0 }, 3500);
+                        setTimeout(function () { conclusion() }, (time + 200));
+                    };
+                } else if (trigger == 51) {
+                    if (chosenStory == 2) {
+                        $('#textBox').fadeOut(time);
+                        $(audioNineth).animate({ volume: 0 }, 3500);
+                        setTimeout(function () { conclusion() }, (time + 200));
                     };
                 };
             });
         };
+        //For the text box element to appear according to instructions - though not used often because most of the time, hover function works better
         if (contextBackground == 1) {
             $('#textBox').fadeIn(time);
         } else if (contextBackground == 2) {
@@ -436,6 +488,7 @@ function timeSwitch(time, timePlus) {
     };
 };
 
+//Below functions with the name "transitionSand" + a number are hard coded code that are split it functions so not everything is compacted together
 function transitionSand1(time) {
     setTimeout(function () {
         $('#Image0').show();
@@ -617,7 +670,7 @@ function deleteElements(v, w, x, y, z, i) {
 };
 
 //alert('To progress onwards, click on the area around the text.');
-//calling for transitions
+//Calling for transitions
 callCover('firstImage');
 (callCover('firstImage', 'secondImage'));
 setTimeout(function () { callCover('secondImage', 'thirdImage') }, 5500);
@@ -694,6 +747,7 @@ $('#startGame').click(function () {
     setTimeout(function () { nextLine(9, 'Assistant', 'backgroundContext', 800, 'characterName', 'Lady...the governor is seeking for you.', 6, 3, 'characterB', 0, 9, 'Sand'), 2400 });
 });
 
+//Function for automatic animation of the storyline - simplifies difficulties in user accessiblity
 function hover(zero, one, two, three, four, time, text, text1) {
     var threeID = '#' + three;
     var fourID = '#' + four;
@@ -708,6 +762,7 @@ function hover(zero, one, two, three, four, time, text, text1) {
 };
 
 //Must click to initiate
+//Separating code into two sections - study scene with governor here
 $('.normalBackground').on('mouseover', function () {
     //if(changeScreen == 0){
     console.log('Clicked on study');
@@ -715,7 +770,6 @@ $('.normalBackground').on('mouseover', function () {
     if (hoverOver == 0) {
         hoverOver = 1;
         hover('#characterA', '#characterC', undefined, 'backgroundContext', 'characterName', 800, '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 'Governor');
-        //nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
         nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
         nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 11);
         //add transition to desk
@@ -727,24 +781,9 @@ $('.normalBackground').on('mouseover', function () {
         nextLine(17, 'You', 'backgroundContext', 800, 'characterName', 'Yes, Governor.', 9);
         nextLine(18, 'Governor', 'backgroundContext', 800, 'characterName', 'You will have the ability to observe it anytime you want to, but only in this room.', 9, 4, '', 1, 18, 'Sand');
         nextLine(19);
-        $('#backUp').hover(function () {
-            //$('#backUp').on('mouseover', function () {
-            if (hoverOver == 2 && inspection == 3) {
-                hoverOver = 3;
-                //setTimeout(function () {
-                hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
-                setTimeout(function () { hoverOver = 4 }, 400);
-                //}, 1200);
-                console.log('called on function');
-            };
-            //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
-            if (hoverOver == 3) {
-                $('#backUp').fadeOut(0);
-                nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 9);
-            };
-            //};
-            //});
-        });
+        //$('#backUp').hover(function () {
+        nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 1);
+        //});
     };
 });
 
@@ -780,6 +819,8 @@ function getCharacter(url, apikey, value) {
             console.log(response[i].Value, value);
             if (value == response[i].Value) {
                 // Character item
+                //Could be used for creating the character without using the images cropped - though OOP is the first preference for sophistication and variation of code
+
                 //  var characterItem = '<img id="character' + response[i].Letter + '" src="' + response[i].ImageReference + '" width="' + response[i].OriginalWidth + '" style="z-index: 80; width:' + response[i].Width + '%; left:' + response[i].Left + 'px; top:' + response[i].Top + 'px; display: none">';
                 //  console.log(characterItem);
                 //  $(".female").append(characterItem);
@@ -789,9 +830,10 @@ function getCharacter(url, apikey, value) {
                 console.log(characterCropped);
                 $(".female").append(characterCropped);
             };
-        }
+        };
     });
-}
+};
+
 function addCharacter(item, url, apikey) {
     var settings = {
         "async": true,
@@ -806,32 +848,52 @@ function addCharacter(item, url, apikey) {
         "processData": false,
         "data": JSON.stringify(item)
     }
-
     $.ajax(settings).done(function (response) {
         console.log('Item successfully added');
         console.log(response);
     });
+};
 
-}
-function getCharacters(itemID, url, apikey) {
-    var serviceURL = url + itemID;
+// function getCharacters(itemID, url, apikey) {
+//     var serviceURL = url + itemID;
+//     var settings = {
+//         "async": true,
+//         "crossDomain": true,
+//         "url": serviceURL,
+//         "method": "GET",
+//         "headers": {
+//             "content-type": "application/json",
+//             "x-apikey": apikey,
+//             "cache-control": "no-cache"
+//         }
+//     };
+
+//     $.ajax(settings).done(function (response) {
+//         console.log('Item successfully retrieved');
+//         console.log(response);
+//     });
+// };
+
+var displayID1 = '';
+var url1 = 'https://mmou1226-b813.restdb.io/rest/userunderstanding';
+/* --- Functions --- */
+function addUnderstanding(item, url, apikey) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": serviceURL,
-        "method": "GET",
+        "url": url,
+        "method": "POST",
         "headers": {
             "content-type": "application/json",
             "x-apikey": apikey,
             "cache-control": "no-cache"
-        }
+        },
+        "processData": false,
+        "data": JSON.stringify(item)
     }
-
     $.ajax(settings).done(function (response) {
-        console.log('Item successfully retrieved');
+        console.log('Item successfully added');
         console.log(response);
-        /*var female1 = new Female(value, 18, 0, 0, 58, 'female', this.value);
-        female1.create('Girl');*/
     });
 };
 
@@ -885,7 +947,7 @@ class Female extends Character {
         console.log(HTML1);
 
         //superclass Character, subclass Female
-    }//Two methods
+    }//Four methods
     pullInformation() {
         var displayInfo = '#character' + this.image + 'Identity';
         var displayInfo1 = '#characterIdentity' + this.image;
@@ -902,10 +964,6 @@ class Female extends Character {
         console.log('Faded in button for confirmation');
     }
     fadeCharacter() {
-        // $("#characterEE").fadeOut(5000);
-        // $("#characterFF").fadeOut(5000);
-        // $("#characterGG").fadeOut(5000);
-        // $("#characterJJ").fadeOut(5000);
         $(".hover-opacity").fadeOut(5000);
         setTimeout(function () {
             $('.hover-opacity').remove();
@@ -926,13 +984,6 @@ $('#context').on('click', function () {
         $('#characterEE').on('click', function () {
             console.log('Character information: E');
             var female1 = new Female('characterE', 15, 0, -150, 'female', 'E', 1195);
-            //female1.create();
-            // female1.fadeCharacter();
-            // setTimeout(function () {
-            //     female1.displayCharacter();
-            //     female1.pullInformation();
-            //     female1.confirmButton();
-            // }, 5000);
             creatingCharacter(female1);
             chosenStory = 1;
             console.log('Chosen story: ' + chosenStory);
@@ -975,7 +1026,7 @@ function creatingCharacter(female) {
     console.log('... ' + female + ' ...');
 };
 
-//calling the database
+//Calling the database
 getCharacter(url, apikey, 2);
 getCharacter(url, apikey, 3);
 getCharacter(url, apikey, 4);
@@ -984,13 +1035,18 @@ var destinationWent = 0;
 var firstTime = 0;
 var yChoice = '';
 var audioFourth = new Audio("Sounds/Zhaoge.mp3");
+var audioSixth = '';
 var audioSeventh = new Audio("Sounds/Exploring.mp3");
 var audioEighth = new Audio("Sounds/Food.mp3");
+var audioNineth = '';
 var audioTenth = new Audio("Sounds/Changan.mp3");
+var audioEleventh = '';
+var audioTwelveth = '';
 var sameButton = 0;
 
+//Creating audio files that does not need to be in a global domain
 function audioGlobal(ID, file, control) {
-    var ID = new Audio(file);
+    ID = new Audio(file);
     $(ID).animate({ volume: 0 }, 0);
     ID.play();
     $(ID).animate({ volume: control }, 3000);
@@ -998,12 +1054,14 @@ function audioGlobal(ID, file, control) {
 
 //Confirming character selection
 $("#confirmSelection").click(function () {
+    //First character
     if (chosenStory == 1) {
         $("#mapE").fadeIn(3000);
         $(audioThird).animate({ volume: 0 }, 5000);
         setTimeout(function () { $('#characterE').fadeOut() }, 5000);
         $("#streetDestination").fadeIn(3000);
-        $("#templeDestination").fadeIn(3000);
+        //Excess storyline - come back if there is time
+        //$("#templeDestination").fadeIn(3000);
         $("#streetDestination").click(function () {
             destinationWent = 1;
             $("#streetE").fadeIn(3000);
@@ -1012,13 +1070,11 @@ $("#confirmSelection").click(function () {
             audioFourth.play();
             $(audioFourth).animate({ volume: 0.35 }, 2000);
             deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
-            //$("#teaHouseDestination").fadeIn(3000);
             if (firstTime == 0) {
                 $('#transparentBackground').fadeIn(0);
                 firstTime = 1;
                 setTimeout(function () {
                     hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BCE - 1046 BCE<br>Shang Dynasty, Zhaoge');
-                    //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
                     nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
                     nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
                 }, 5000);
@@ -1029,21 +1085,26 @@ $("#confirmSelection").click(function () {
                 setTimeout(function () {
                     $('#transparentBackground').fadeIn(0);
                     hover('#characterI', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, 'Miss, please wait for a moment. The private room upstairs is ready for use at any time. I will just tell the manager of any dietetic restraints.', 'Maid');
-                    //nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some cuisines for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
                     nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you stood quietly at the foot of the stairs and paused. Looking around, you noticed that there were two different tables<br>of guests located just under your private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
                     $("#firstChoice").click(function () {
+                        numberChoices = 1;
                         $('#transparentBackground').fadeIn(0);
                         updateArray(1);
                         if (hoverOver == 5) {
                             hoverOver = 6;
-                            numberChoices = 1;
                             deleteElements(undefined, undefined, undefined, undefined, 'firstChoice', 'secondChoice');
                             hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "You wanted to stay there, but your conscience tells you that a lady from an eminent family shouldn’t eavesdrop on others' conversations...after<br>a short debate within your mind, you stood still.");
                             setTimeout(function () { yChoice = 0 }, 800);
                             if (yChoice == 0) {
                                 $('#transparentBackground').on('click', function () {
                                     if (yChoice == 0) {
-                                        setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 400);
+                                        setTimeout(function () {
+                                            //audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35);
+                                            audioSixth = new Audio('Sounds/Listening.mp3');
+                                            $(audioSixth).animate({ volume: 0 }, 0);
+                                            audioSixth.play();
+                                            $(audioSixth).animate({ volume: 0.35 }, 3000);
+                                        }, 400);
                                         yChoice = 1;
                                         guestConversation(24);
                                     };
@@ -1052,7 +1113,13 @@ $("#confirmSelection").click(function () {
                         };
                     });
                     $("#secondChoice").click(function () {
-                        setTimeout(function () { audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35) }, 3000);
+                        setTimeout(function () {
+                            //audioGlobal('audioSixth', 'Sounds/Listening.mp3', 0.35);
+                            audioSixth = new Audio('Sounds/Listening.mp3');
+                            $(audioSixth).animate({ volume: 0 }, 0);
+                            audioSixth.play();
+                            $(audioSixth).animate({ volume: 0.35 }, 3000);
+                        }, 3000);
                         $('#transparentBackground').fadeIn(0);
                         yChoice = 2;
                         if (hoverOver == 5) {
@@ -1063,19 +1130,12 @@ $("#confirmSelection").click(function () {
                             nextLine(25, '', 'backgroundInformation', 1600, 'characterTitle', "When you passed by, you seemed to hear them talking about you. But the next moment, it seemed as if they didn't. Though it doesn't really matter anymore.<br>You continued walking up without any pause.", undefined, undefined, undefined, undefined, undefined, undefined, 1);
                             nextLine(26, '', 'backgroundInformation', 800, 'characterTitle', '');
                             hoverOver = 6;
-                            // if (yChoice == 1) {
-                            //     yChoice = 2;
-                            //     hoverOver = 6;
-                            //     $('#transparentBackground').on('click', function () {
-                            //         guestConversation(26);
-                            //     });
-                            // };
                         };
                     });
                 }, 3000);
             });
         });
-        //Trying to code if the user could return to the big map and choose the second choice
+        //Trying to code if the user could return to the big map and choose the second choice - not finished
         $("#templeDestination").click(function () {
             var audioFifth = new Audio("Sounds/Temple.mp3");
             $(audioFifth).animate({ volume: 0 });
@@ -1090,9 +1150,9 @@ $("#confirmSelection").click(function () {
             };
             $('#enterTemple').fadeIn(3000);
             $('#enterTemple').click(function () {
-
             });
         });
+        //Second character
     } else if (chosenStory == 2) {
         $("#mapF").fadeIn(3000);
         $(audioThird).animate({ volume: 0 }, 5000);
@@ -1117,53 +1177,57 @@ $("#confirmSelection").click(function () {
                 $('#meetingRoomF').fadeIn(3000);
                 $('#enterHall').fadeOut(800);
                 $('#characterF').css({ 'z-index': '120', left: '300px' });
-                hover(undefined, '#textBox', undefined, 'backgroundInformation', undefined, 3000, 'A row of young girls stood in line near the walls, waiting to welcome the guests for this annual forum.');
-                setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
-                nextLine(24, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', '(Puts on a smile after she sees you approaching) First time seeing you here, you are Miss...', 1, undefined, 'characterN', 0);
-                nextLine(25, 'You', 'backgroundInformation', 800, 'characterTitle', 'Miss Gu is fine.', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
-                nextLine(26, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "(Nod) I'll just guide you around this place. Hopefully you will become familiar soon.", 1, undefined, 'characterN', 0, undefined, undefined, undefined, 0, 'characterF');
-                nextLine(27, undefined, 'backgroundInformation', 1000, undefined, 'Here is obviously the meeting room, for the next two weeks, any discussions would be held here.');
-                nextLine(28, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
-                $('#confirmNext').click(function () {
-                    $('#transparentBackground').fadeOut(0);
-                    $('#confirmNext').fadeOut(800);
-                    $(audioSeventh).animate({ volume: 0 }, (11500));
-                    $('#gardenF').fadeIn(3000);
-                    setTimeout(function () {
-                        hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is the garden, or you could call it pond if you like. Our master preferred water elements.', 'Young Girl');
-                        setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1000);
-                        nextLine(29, undefined, 'backgroundInformation', 800, 'characterTitle', "Following this path down all the way to the end, you'll see the kitchen on the right. If you have any eating habits, inform them there.");
-                        nextLine(30, '', 'backgroundInformation', 800, 'characterTitle', 'Your eyes lit up, if the kitchen is there...does that mean you could go at anytime to seek for food?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
-                        nextLine(31, undefined, 'backgroundInformation', 800, undefined, 'But you are not sure if they only provided proper meals...and...you looked at the young girl in front of you in a hidden manner. Something tells you that you<br>better not ask directly.');
-                        nextLine(32, undefined, 'backgroundInformation', 800, undefined, 'Do you want to sneak in at night and have a look?');
-                        $('#thirdChoice').click(function () {
-                            console.log('selected first choice');
-                            $('#transparentBackground').fadeIn(0);
-                            updateArray(2);
-                            deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
-                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
-                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Making your decision, you cheerfully followed the young girl.");
-                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, "She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried to disregard this thought.Why did I think<br>of this?");
-                            secondCharacter();
-                        });
-                        $('#fourthChoice').click(function () {
-                            $('#transparentBackground').fadeIn(0);
-                            deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
-                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
-                            hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Even though you know that a proper lady should do this but...do you really care?");
-                            nextLine(33, undefined, 'backgroundInformation', 800, undefined, 'Following the young girl, you wondered. She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried<br>to disregard this thought. Why did I think of this?');
-                            secondCharacter();
-                        });
-                    }, 4000);
-                });
+                //Appears too early, code to appear after background appears completely
+                setTimeout(function () {
+                    hover(undefined, '#textBox', undefined, 'backgroundInformation', undefined, 3000, 'A row of young girls stood in line near the walls, waiting to welcome the guests for this annual forum.');
+                    setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                    nextLine(24, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', '(Puts on a smile after she sees you approaching) First time seeing you here, you are Miss...', 1, undefined, 'characterN', 0);
+                    nextLine(25, 'You', 'backgroundInformation', 800, 'characterTitle', 'Miss Gu is fine.', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                    nextLine(26, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "(Nod) I'll just guide you around this place. Hopefully you will become familiar soon.", 1, undefined, 'characterN', 0, undefined, undefined, undefined, 0, 'characterF');
+                    nextLine(27, undefined, 'backgroundInformation', 1000, undefined, 'Here is obviously the meeting room, for the next two weeks, any discussions would be held in here.');
+                    nextLine(28, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
+                    $('#confirmNext').click(function () {
+                        $('#transparentBackground').fadeOut(0);
+                        $('#confirmNext').fadeOut(800);
+                        $(audioSeventh).animate({ volume: 0 }, (11500));
+                        $('#gardenF').fadeIn(3000);
+                        setTimeout(function () {
+                            hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is the garden, or you could call it pond if you like. Our master preferred water elements.', 'Young Girl');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1000);
+                            nextLine(29, undefined, 'backgroundInformation', 800, 'characterTitle', "Following this path down all the way to the end, you'll see the kitchen on the right. If you have any eating habits, inform them there.");
+                            nextLine(30, '', 'backgroundInformation', 800, 'characterTitle', 'Your eyes lit up, if the kitchen is there...does that mean you could go at anytime to seek for food?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                            nextLine(31, undefined, 'backgroundInformation', 800, undefined, 'But you are not sure if they only provided proper meals...and...you looked at the young girl in front of you in a hidden manner. Something tells you that you<br>better not ask directly.');
+                            nextLine(32, undefined, 'backgroundInformation', 800, undefined, 'Do you want to sneak in at night and have a look?');
+                            $('#thirdChoice').click(function () {
+                                console.log('selected first choice');
+                                $('#transparentBackground').fadeIn(0);
+                                updateArray(2);
+                                deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
+                                //setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Making your decision, you cheerfully followed the young girl.");
+                                nextLine(33, undefined, 'backgroundInformation', 800, undefined, "She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried to disregard this thought.Why did I think<br>of this?");
+                                secondCharacter();
+                            });
+                            $('#fourthChoice').click(function () {
+                                $('#transparentBackground').fadeIn(0);
+                                deleteElements(undefined, undefined, undefined, undefined, 'thirdChoice', 'fourthChoice');
+                                //setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 800);
+                                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, "Even though you know that a proper lady should do this but...do you really care?");
+                                nextLine(33, undefined, 'backgroundInformation', 800, undefined, 'Following the young girl, you wondered. She seems a little unattentive...gazing across as if seeking for a way to escape...shaking your head, you tried<br>to disregard this thought. Why did I think of this?');
+                                secondCharacter();
+                            });
+                        }, 4000);
+                    });
+                }, 3000);
             });
         });
-    } else if (chosenStory == 3){
+        //Third character
+    } else if (chosenStory == 3) {
         $("#mapG").fadeIn(3000);
         $(audioThird).animate({ volume: 0 }, 5000);
         setTimeout(function () { $('#characterG').fadeOut() }, 5000);
         $('#marketDestination').fadeIn(3000);
-        $('#marketDestination').click(function (){
+        $('#marketDestination').click(function () {
             $('#streetG').fadeIn(3000);
             $('#marketDestination').fadeOut(800);
             setTimeout(function () {
@@ -1178,21 +1242,58 @@ $("#confirmSelection").click(function () {
                 nextLine(22, undefined, 'backgroundInformation', 800, undefined, 'And as the starting point of the Silk Road, Changan signified the prosperity of ancient China.');
                 nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
             }, 3000);
-            $('#enterRestaurant').click(function (){
+            $('#enterRestaurant').click(function () {
                 $('#doorG').fadeIn(3000);
                 $('#enterRestaurant').fadeOut(800);
                 setTimeout(function () {
                     $('#enterRoom').fadeIn(800 * 2);
-                    $('#enterRoom').click(function (){
+                    $('#enterRoom').click(function () {
                         $('#roomG').fadeIn(3000);
                         $('#enterRoom').fadeOut(800);
                         setTimeout(function () {
                             $('#windowSide').fadeIn(800 * 2);
-                            $('#windowSide').click(function (){
+                            $('#windowSide').click(function () {
+                                $('#characterG').css({ 'z-index': '120', left: '330px' });
+                                $(audioTenth).animate({ volume: 0 }, 11500);
                                 $('#windowG').fadeIn(3000);
                                 $('#windowSide').fadeOut(800);
-                                setTimeout(function (){
+                                setTimeout(function () {
+                                    $('#doorG').css({ 'z-index': 105, display: 'none' }, 0);
                                     hover('#characterG', '#textBox', undefined, 'backgroundInformation', undefined, 1200, 'Tapping on the wooden balcony fencing, you looked down towards the entrance. There seems to be a sort of quarrel going down there...');
+                                    setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                                    nextLine(24, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterG');
+                                    nextLine(25, 'Maid', 'backgroundInformation', 800, 'characterTitle', '(Looking around in a panic) Nonsense...Miss others will hear this...your reputation...', 1, undefined, 'characterP', 0, undefined, undefined, undefined, 0, 'characterQ');
+                                    nextLine(26, 'Noble Lady', 'backgroundInformation', 800, 'characterTitle', "Since I dare to come here, why would you think I'm afraid of letting others know? Let go of me.", 1, undefined, 'characterQ', 0, undefined, undefined, undefined, 0, 'characterP');
+                                    nextLine(27, 'Maid', 'backgroundInformation', 800, 'characterTitle', "Don't be silly miss, following the upholding of the annual discussion forum, many strangers entered the surrounding cities, if your father knows of your<br>actions, he's going to be extremely mad!", 1, undefined, 'characterP', 0, undefined, undefined, undefined, 0, 'characterQ');
+                                    nextLine(28, 'Noble Lady', 'backgroundInformation', 800, 'characterTitle', '(Frown) Not along ago the host for the forum sent out a message announcing for the separation of female guests for the sake of their reputation.<br>Disguising their intentions under a mask of politeness...', 1, undefined, 'characterQ', 0, 28, 'Irritated', undefined, 0, 'characterP');
+                                    nextLine(29, undefined, 'backgroundInformation', 800, undefined, 'Have you ever seen, even heard of male guests been arranged to share rooms? They only do this to female guests.');
+                                    nextLine(30, 'Maid', 'backgroundInformation', 800, 'characterTitle', '(Hesitating) Miss...this is just how the world works, our period has already seen rises to the treatment of women...', 1, undefined, 'characterP', 0, undefined, undefined, undefined, 0, 'characterQ');
+                                    nextLine(31, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterP');
+                                    nextLine(32, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterG');
+                                    nextLine(33, 'You', 'backgroundInformation', 800, 'characterTitle', "(Politely smiling) Indeed, an interesting play is happening downstairs.", 1, undefined, 'characterG', 0, undefined, undefined, undefined, 0, 'characterR');
+                                    nextLine(34, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Are you willing to tell us then?', 1, undefined, 'characterS', 0, undefined, undefined, undefined, 0, 'characterG');
+                                    nextLine(35, 'You', 'backgroundInformation', 800, 'characterTitle', '(Thinking) ...putting it in brief terms, it was just a lady trying to prove that a women could enter taverns freely, but was stopped by her maid.', 1, undefined, 'characterG', 0, undefined, undefined, undefined, 0, 'characterS');
+                                    nextLine(36, 'Male Guest Three', 'backgroundInformation', 800, 'characterTitle', 'That was...', 1, undefined, 'characterT', 0, undefined, undefined, undefined, 0, 'characterG');
+                                    nextLine(37, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', '(Hint of disgust) Then I guess the lady left the maid in a very poor position.', 1, undefined, 'characterS', 0, undefined, undefined, undefined, 0, 'characterT');
+                                    nextLine(38, 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', '(Nod) Not only does she make it hard for her maid. But if others hear of this...which man would take her as a future partner?', 1, undefined, 'characterR', 0, undefined, undefined, undefined, 0, 'characterS');
+                                    nextLine(39, '', 'backgroundInformation', 800, 'characterTitle', 'Hearing this, you...', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterR');
+                                    $('#fifthChoice').click(function () {
+                                        $('#transparentBackground').fadeIn(0);
+                                        deleteElements(undefined, undefined, undefined, undefined, 'fifthChoice', 'sixthChoice');
+                                        hover('#characterG', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, "I do believe so too, there are many ways in which she could have taken rather than choosing the worst one.", 'You');
+                                        nextLine(40, 'Male Guest Three', 'backgroundInformation', 800, 'characterTitle', '(A little disappointed) Ladies were not born to find husbands, they have their own pursuances.', 1, undefined, 'characterT', 0, undefined, undefined, undefined, 0, 'characterG');
+                                        nextLine(41, 'You', 'backgroundInformation', 1000, 'characterTitle', "(Glances at him) ...Let's not argue for a trifle, today was meant to be a day purely for reunions.", 1, undefined, 'characterG', 0, undefined, undefined, undefined, 0, 'characterT');
+                                        nextLine(42, '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterG');
+                                    });
+                                    $('#sixthChoice').click(function () {
+                                        updateArray(3);
+                                        $('#transparentBackground').fadeIn(0);
+                                        deleteElements(undefined, undefined, undefined, undefined, 'fifthChoice', 'sixthChoice');
+                                        hover('#characterG', undefined, undefined, 'backgroundInformation', 'characterTitle', 800, "(Slightly annoyed but managed to hide it) I think ladies were not born to find good husbands in the first place...she probably was just too irritated by the<br>judgements of others.", 'You');
+                                        nextLine(40, 'Male Guest Three', 'backgroundInformation', 800, 'characterTitle', "(Seems to be quite satisfied) I agree, there weren't any rules that restricts women from entering these taverns.", 1, undefined, 'characterT', 0, undefined, undefined, undefined, 0, 'characterG');
+                                        nextLine(41, undefined, 'backgroundInformation', 1000, undefined, "(Gesturing towards the wine and dishes) But we were here for catch ups aren't we? Let's not get too involved with a trifle matter.");
+                                        nextLine(42, '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterT');
+                                    });
                                 }, 3000);
                             });
                         }, 3000);
@@ -1200,23 +1301,24 @@ $("#confirmSelection").click(function () {
                 }, 3000);
             });
         });
+    } else if (chosenStory == 4) {
+        alert('To be continued');
     };
 });
 
 function guestConversation(beginningLine) {
-    //Creating a parameter to determine the beginning trigger for the conversation does not work - could not code the trigger to automatically update by one & beginningLine + 1, beginningLine + 2 does not work
+    //Function created to minimise the compilation of code
     if (hoverOver == 6) {
         hoverOver = 7;
         if (yChoice == 1) {
             $('#characterE').fadeOut(2400);
-            //console.log("I'm heeerrrrreeeee");
             $("#roomE").fadeIn(3000);
             hover('#characterM', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, "(Looked in your direction) Isn't that Miss Xiao? She generally doesn’t accept any invitations to social events and there is no easy way to see her. I guess we<br>were quite fortunate today.", 'Male Guest One');
             nextLine(beginningLine, 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'It is said that she had just been ranked as the most talented lady of Zhaoge recently. Her number of votes is far beyond other ladies.', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
             nextLine((beginningLine + 1), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Flowers and applause should match a beauty, let alone such a beauty? What a pity... A few days ago, news came that those people above liked her.<br>Otherwise, no doubt every young man would want to compete for her favour.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
             nextLine((beginningLine + 2), 'Male Guest Two', 'backgroundInformation', 800, 'characterTitle', 'Including you?', 1, undefined, 'characterK', 0, undefined, undefined, undefined, 0, 'characterM');
             nextLine((beginningLine + 3), 'Male Guest One', 'backgroundInformation', 800, 'characterTitle', 'Including me.', 1, undefined, 'characterM', 0, undefined, undefined, undefined, 0, 'characterK');
-            nextLine((beginningLine + 4), '', 'backgroundInformation', 1600, 'characterTitle', 'At the same time...on the other table...', 11, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterM');
+            nextLine((beginningLine + 4), '', 'backgroundInformation', 1600, 'characterTitle', 'At the same time...on the other table...', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterM');
             nextLine((beginningLine + 5), 'Female Guest One', 'backgroundInformation', 1600, 'characterTitle', "(Sipping the teacup gently) Isn't that Miss Xiao? Finally free today after all her messes?", 1, undefined, 'characterH', 0, (beginningLine + 5), 'Surprised');
             nextLine((beginningLine + 6), 'Female Guest Two', 'backgroundInformation', 800, 'characterTitle', "That being said, she doesn't go to any public events. Interpreting it nicely than she’s just unapproachable, but interpreting straightforwardly...<br>than she’s just ungrateful.", 1, undefined, 'characterL', 0, undefined, undefined, undefined, 0, 'characterH');
             nextLine((beginningLine + 7), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', "Don’t say it like this, if someone who cares listened, you’d be attacked by her crazy admirers.", 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
@@ -1231,6 +1333,7 @@ function guestConversation(beginningLine) {
             nextLine((beginningLine + 11), 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss...is there anything wrong? Why are you...still standing here?', 1, undefined, 'characterI', 0, (beginningLine + 11), 'Sand', undefined, 0, 'characterE');
             nextLine((beginningLine + 12), 'You', 'backgroundInformation', 800, 'characterTitle', "(Perfunctorily) Nothing, just thinking about something.", 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
             nextLine((beginningLine + 13), '', 'backgroundInformation', 800, 'characterTitle', "You hid your thoughts and started walking up the staircase. You've already spent enough time listening and you cannot waste more.", 1, undefined, 'characterE', 0, undefined, undefined, undefined);
+            nextLine((beginningLine + 14), '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterE');
         } else if (yChoice == 2) {
             $('#secondFloorEE').fadeIn(3000);
             setTimeout(function () {
@@ -1240,18 +1343,20 @@ function guestConversation(beginningLine) {
             nextLine(beginningLine, 'You', 'backgroundInformation', 1000, 'characterTitle', "Come in.", 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterI');
             nextLine((beginningLine + 1), '', 'backgroundInformation', 1000, 'characterTitle', '', 1);
             nextLine((beginningLine + 2), 'You', 'backgroundInformation', 800, 'characterTitle', '(Shaking head slightly) Why would you say this?', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
-            nextLine((beginningLine + 3), 'Maid', 'backgroundInformation', 800, 'characterTitle', "I just thought that most of the noble ladies in Zhaoge disliked you out of jealousy, but most of the young talents praised you. Miss<br>were often distanced out from them, I'm scared you will take it too seriously.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            nextLine((beginningLine + 3), 'Maid', 'backgroundInformation', 800, 'characterTitle', "I just thought that most of the noble ladies in Zhaoge disliked you out of jealousy, but most of the young talents praised you. And then Miss were often<br>distanced out from them, I'm scared you will take it too seriously.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
             nextLine((beginningLine + 4), 'You', 'backgroundInformation', 800, 'characterTitle', "I'm used to it, don't worry. It's only a few words.", 1, undefined, 'characterE', 0, (beginningLine + 4), 'Sighing', undefined, 0, 'characterI');
             nextLine((beginningLine + 5), undefined, 'backgroundInformation', 800, undefined, 'By the way, did father accept the invitations?');
             nextLine((beginningLine + 6), 'Maid', 'backgroundInformation', 800, 'characterTitle', "(Anxious)...He accepted the invitations from the ones above...it's two days later.", 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
             nextLine((beginningLine + 7), 'You', 'backgroundInformation', 800, 'characterTitle', '(Looking away) Hope that after father receives the recognition he wants this time, I could have some days off.', 1, undefined, 'characterE', 0, undefined, undefined, undefined, 0, 'characterI');
             nextLine((beginningLine + 8), '', 'backgroundInformation', 800, 'characterTitle', 'Looking deeply in her direction, the maid silenced. She knows Miss has been used as a tool to maintain political power...but she sincerely hopes that one day<br>this would change...', 1, undefined, 'characterI', 0, undefined, undefined, undefined, 0, 'characterE');
+            nextLine((beginningLine + 9), '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterI');
             //Should end all short sections with a conclusion - if there is time to code a function to do this
         };
     };
 };
 
 function secondCharacter() {
+    //Function created for second character (if chosen) to also minimise excess code compiled together
     $('#confirmNext').css({ top: '202px', right: '130px', 'z-index': '125' }, 0);
     nextLine(34, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, 34, 'Walking', undefined, 0, 'characterF');
     $('#confirmNext').click(function () {
@@ -1262,65 +1367,71 @@ function secondCharacter() {
             setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
             nextLine(35, undefined, 'backgroundInformation', 800, undefined, '(Scanning you from head to toe) I heard that you enjoyed practicing, I suppose this will be your usual place to go to.');
             nextLine(36, '', 'backgroundInformation', 800, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterN');
-            //if (sameButton == 0) {
-                $('#confirmNext').click(function () {
-                    //sameButton = 1;
-                    $('#confirmNext').fadeOut(800);
-                    $('#courtyardF').fadeIn(3000);
+            $('#confirmNext').click(function () {
+                $('#confirmNext').fadeOut(800);
+                $('#courtyardF').fadeIn(3000);
+                setTimeout(function () {
                     setTimeout(function () {
+                        //audioGlobal('audioNineth', 'Sounds/Confronting.mp3', 0.4);
+                        audioNineth = new Audio('Sounds/Confronting.mp3');
+                        $(audioNineth).animate({ volume: 0 }, 0);
+                        audioNineth.play();
+                        $(audioNineth).animate({ volume: 0.4 }, 3000);
+                    }, 200);
+                    hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is where you will be staying for the two weeks.', 'Young Girl');
+                    setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
+                    nextLine(37, undefined, 'backgroundInformation', 800, undefined, "Quite quiet right? This place is specifically isolated out for female guests. We do believe that it's better to keep clear of male guests. Just so rumours<br>that further hurts your reputation would't spread.");
+                    nextLine(38, 'You', 'backgroundInformation', 800, 'characterTitle', 'Further hurt...my reputation?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
+                    nextLine(39, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "Miss, don't tell me you don't know how the outer world talks of you.", 1, undefined, 'characterN', 0, 39, 'Smiling', undefined, 0, 'characterF');
+                    nextLine(40, undefined, 'backgroundInformation', 1000, undefined, "(Looking at the sky) Unfortunately, I need to go welcome other guests, so I'll just leave you here.");
+                    nextLine(41, undefined, 'backgroundInformation', 1200, undefined, '(Leaving) By the way, because there is only you and another, so I guess you will have a new roommate.', undefined, undefined, undefined, 0, 41, 'Sand', undefined, 0, 'characterN');
+                    nextLine(42, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
+                    $('#confirmLast').click(function () {
+                        $('#confirmLast').fadeOut(800);
+                        $('#roomF').fadeIn(3000);
                         setTimeout(function () {
-                            audioGlobal('audioNineth', 'Sounds/Confronting.mp3', 0.4);
-                            // $(audioNineth).animate({ volume: 0 }, 0);
-                            // audioNineth.play();
-                            // $(audioNineth).animate({ volume: 0.4 }, 3000);
-                        }, 200);
-                        hover('#characterN', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1200, 'This is where you will be staying for the two weeks.', 'Young Girl');
-                        setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
-                        nextLine(37, undefined, 'backgroundInformation', 800, undefined, "Quite quiet right? This place is specifically isolated out for female guests. We do believe that it's better to keep clear of male guests. Just so rumours<br>that further hurts your reputation would't spread.");
-                        nextLine(38, 'You', 'backgroundInformation', 800, 'characterTitle', 'Further hurt...my reputation?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterN');
-                        nextLine(39, 'Young Girl', 'backgroundInformation', 800, 'characterTitle', "Miss, don't tell me you don't know how the outer world talks of you.", 1, undefined, 'characterN', 0, 39, 'Smiling', undefined, 0, 'characterF');
-                        nextLine(40, undefined, 'backgroundInformation', 1000, undefined, "(Looking at the sky) Unfortunately, I need to go welcome other guests, so I'll just leave you here.");
-                        nextLine(41, undefined, 'backgroundInformation', 1200, undefined, '(Leaving) By the way, because there is only you and another, so I guess you will have a new roommate.', undefined, undefined, undefined, 0, 41, 'Sand', undefined, 0, 'characterN');
-                        nextLine(42, '', 'backgroundInformation', 800, 'characterTitle', '', 1);
-                        //if (sameButton == 1) {
-                            $('#confirmLast').click(function () {
-                                //sameButton = 2;
-                                $('#confirmLast').fadeOut(800);
-                                $('#roomF').fadeIn(3000);
-                                setTimeout(function () {
-                                    hover('#characterO', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1400, 'Is it Miss Gu?', 'Roommate');
-                                    setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1400);
-                                    nextLine(43, 'You', 'backgroundInformation', 800, 'characterTitle', 'Yes, you are?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
-                                    nextLine(44, 'Roommate', 'backgroundInformation', 800, 'characterTitle', '(Smiling) Liu（柳）, I guess we are going to be roommates for the next two weeks.', 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
-                                    nextLine(45, 'You', 'backgroundInformation', 800, 'characterTitle', "(Curiously) No offence at all, but I was just wondering because I heard that it's supposed to be one guest one courtyard?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
-                                    nextLine(46, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', 'No offence taken, yes it was supposed to so but as there were more guests than expected. The master here was afraid that the male guests would feel disrespcted.<br>Comparitively, perhaps female guests would feel more used to it.', 1, undefined, 'characterO', 0, 46, 'Sighing', undefined, 0, 'characterF');
-                                    nextLine(47, 'You', 'backgroundInformation', 800, 'characterTitle', "...Are you comfortable with this?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
-                                    nextLine(48, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', "(Shaking her head) I'm used to it...and it's only two sharing one courtyard. Don't worry.", 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
-                                    nextLine(49, undefined, 'backgroundInformation', 800, undefined, "Come in, I'll help you tidy up.");
-                                    nextLine(50, '', 'backgroundInformation', 800, 'characterTitle', 'You nodded and followed her in, but something kept on ringing in the back of your mind...Did you forget something?');
-                                }, 5000);
-                            });
-                        //};
-                    }, 4000);
-                });
-            //};
+                            hover('#characterO', '#textBox', undefined, 'backgroundInformation', 'characterTitle', 1400, 'Is it Miss Gu?', 'Roommate');
+                            setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1400);
+                            nextLine(43, 'You', 'backgroundInformation', 800, 'characterTitle', 'Yes, you are?', 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                            nextLine(44, 'Roommate', 'backgroundInformation', 800, 'characterTitle', '(Smiling) Liu（柳）, I guess we are going to be roommates for the next two weeks.', 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
+                            nextLine(45, 'You', 'backgroundInformation', 800, 'characterTitle', "(Curiously) No offence at all, but I was just wondering because I heard that it's supposed to be one guest one courtyard?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                            nextLine(46, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', 'No offence taken, yes it was supposed to so but as there were more guests than expected. The master here was afraid that the male guests would feel disrespcted.<br>Comparitively, perhaps female guests would feel more used to it.', 1, undefined, 'characterO', 0, 46, 'Sighing', undefined, 0, 'characterF');
+                            nextLine(47, 'You', 'backgroundInformation', 800, 'characterTitle', "...Are you comfortable with this?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
+                            nextLine(48, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', "(Shaking her head) I'm used to it...and it's only two sharing one courtyard. Don't worry.", 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
+                            nextLine(49, undefined, 'backgroundInformation', 800, undefined, "Come in, I'll help you tidy up.");
+                            nextLine(50, '', 'backgroundInformation', 800, 'characterTitle', 'You nodded and followed her in, but something kept on ringing in the back of your mind...Did you forget something?', 1);
+                            nextLine(51, '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterO');
+                        }, 5000);
+                    });
+                }, 4000);
+            });
         }, 4000);
 
     });
 };
 
-//The code was not actually finished...
+function conclusion() {
+    setTimeout(function () {
+        audioGlobal('eleventh', 'Sounds/Information.mp3', 0.45);
+        $('#informationBackground').fadeIn(3000);
+        $('#description').fadeIn(3000);
+        $('#submit').fadeIn(3000);
+        $('#submit').click(function () {
+            console.log('submitted');
+            var understanding = { Learned: $('#description').val() };
+            addUnderstanding(understanding, url1, apikey);
+        });
+    }, 4500);
+};
 
-//1. Eliminate previous unneccessary errors and sophisticate the code more
-//2. Enhance user accessibility and potentially "soft code" more?
-//3. Progress on storyline and update/debug along the way
-
+//Section of code for the updating of menu if user chooses the wrong choice
+//Empty array waiting to be updated if triggered
 arrWrong = [];
 
 arrDescription = [
     { question: "Listen or not", description: "All ladies from noble families had extremely strict standards of behaviour,<br>which also includes not to listen on others' conversations without invitation." },
     { question: "Yes or no", description: "Even though Tang Dynasty is one of the least restrictive time periods in Ancient <br>China, but such actions are still considered inappropriate. Particularly for women." },
-    { question: "third question", description: "Maybe anything will do..." },
+    { question: "Agree or disagree", description: "Though there are individuals who acknowledges the slightly rising social <br>status of women during the Tang Dynasty, many still neglects such ideas and still regards them as<br>inferior to men." },
     { question: "fourth question", description: "Actually one more..." },
 ]
 
@@ -1328,9 +1439,11 @@ var indexNumber = 0;
 var numberChoices = 0;
 
 function updateArray(numberWrong) {
+    console.log('Array wrong length: ' + arrWrong.length, numberWrong);
+
+    //This section of code commented out is an alternate wat to update the function - though it does not work as expected but parts of it is still useful to look at
     //numberWrong is the number of wrong choices and index number is the number of indexes supposedly to be updated
     //numberWrong should be able to indicate how many rows in arrWrong needs to be updated
-    console.log('Array wrong length: ' + arrWrong.length, numberWrong);
     //code something to detect how many objects are in the array
     // let counter = arrWrong.length;
 
@@ -1355,10 +1468,12 @@ function updateArray(numberWrong) {
         questionNumber: numberWrong,
         description: arrDescription[numberWrong - 1].description,
     };
+    //Updating the array - animation is also coded just so user knows that the menu has being updated
     arrWrong.push(wrong);
     $('#menuButton').animate({ 'background-color': 'rgb(245, 240, 213)', color: 'rgb(95, 81, 43)', 'border-color': 'rgb(95, 81, 43);' }, 800);
 };
 
+//Following event handlers are just the basic intructions for the menu button
 $('#menuButton').click(function () {
     $('#menuButton').animate({ 'background-color': 'rgb(95, 81, 43);', color: 'white', 'border-color': 'rgb(245, 240, 213);' }, 100);
     $('#recallBackground').fadeIn(100);
