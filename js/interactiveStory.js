@@ -1326,7 +1326,7 @@ function guestConversation(beginningLine) {
             nextLine((beginningLine + 9), 'Female Guest One', 'backgroundInformation', 800, 'characterTitle', '(Pursing her lips and smiled) Who knows.', 1, undefined, 'characterH', 0, undefined, undefined, undefined, 0, 'characterL');
             nextLine((beginningLine + 10), '', 'backgroundInformation', 1600, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterH');
             $('#storeEE').on('mouseover', function () {
-                hover('#characterE', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, 'Your breath paused for moment...', '');
+                hover('#characterE', undefined, undefined, 'backgroundInformation', 'characterTitle', 3000, 'Your breath paused for a moment...', '');
                 console.log('You should appear...');
                 $('#transparentBackground').fadeIn(0);
             });
@@ -1415,6 +1415,7 @@ function conclusion() {
         audioGlobal('eleventh', 'Sounds/Information.mp3', 0.45);
         $('#informationBackground').fadeIn(3000);
         $('#description').fadeIn(3000);
+        $('#instruction').fadeIn(3000);
         $('#submit').fadeIn(3000);
         $('#submit').click(function () {
             console.log('submitted');
