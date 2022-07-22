@@ -36,14 +36,6 @@ var chosenStory = 0;
 
 //Arrays
 
-// arrCover = [
-//     { name: 'firstImage', img: 'Images/First.jpg' },
-//     { name: 'secondImage', img: 'Images/Second.jpg' },
-//     { name: 'thirdImage', img: 'Images/Third.jpg' },
-//     { name: 'fourthImage', img: 'Images/Fourth.jpg' },
-//     { name: 'fifthImage', img: 'Images/Fifth.jpg' },
-// ];
-
 arrCover = [
     { name: 'firstImage', img: 'Images/First.jpg', value: 1},
     { name: 'fifthImage', img: 'Images/Fifth.jpg', value: 5},
