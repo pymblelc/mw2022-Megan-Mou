@@ -35,13 +35,31 @@ var animationControl = 0;
 var chosenStory = 0;
 
 //Arrays
+
+// arrCover = [
+//     { name: 'firstImage', img: 'Images/First.jpg' },
+//     { name: 'secondImage', img: 'Images/Second.jpg' },
+//     { name: 'thirdImage', img: 'Images/Third.jpg' },
+//     { name: 'fourthImage', img: 'Images/Fourth.jpg' },
+//     { name: 'fifthImage', img: 'Images/Fifth.jpg' },
+// ];
+
 arrCover = [
-    { name: 'firstImage', img: 'Images/First.jpg' },
-    { name: 'secondImage', img: 'Images/Second.jpg' },
-    { name: 'thirdImage', img: 'Images/Third.jpg' },
-    { name: 'fourthImage', img: 'Images/Fourth.jpg' },
-    { name: 'fifthImage', img: 'Images/Fifth.jpg' },
+    { name: 'firstImage', img: 'Images/First.jpg', value: 1},
+    { name: 'fifthImage', img: 'Images/Fifth.jpg', value: 5},
+    { name: 'thirdImage', img: 'Images/Third.jpg', value: 3 },
+    { name: 'secondImage', img: 'Images/Second.jpg', value: 2},
+    { name: 'fourthImage', img: 'Images/Fourth.jpg', value: 4 },
 ];
+
+function SortByValue(a, b){
+    var aValue = a.value;
+    var bValue = b.value; 
+    return ((aValue < bValue) ? -1 : ((aValue > bValue) ? 1 : 0));
+  }
+  
+  arrCover.sort(SortByValue);
+  console.log(arrCover.sort(SortByValue));
 
 arrTransition = [
     { name: 'Image0', img: 'Transition/Sand/0.png', id: '#Image0', id2: '' },
