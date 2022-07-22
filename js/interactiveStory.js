@@ -368,11 +368,11 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     if (chosenStory == 3) {
                         $('#transparentBackground').fadeOut(0);
                         $('#textBox').fadeOut(time);
-                        $('#doorG').fadeOut(4000);
+                        $('#doorG').fadeOut(3500);
                         setTimeout(function () {
                             hover('#characterG', '#textBox', undefined, 'backgroundInformation', undefined, 1200, "You didn't keep on listening, turned and went back into the room.");
                             setTimeout(function () { $('#transparentBackground').fadeIn(0) }, 1200);
-                        }, 5000);
+                        }, 4500);
                     };
                 } else if (trigger == 32) {
                     if (chosenStory == 2) {
@@ -1417,7 +1417,7 @@ function secondCharacter() {
                             nextLine(47, 'You', 'backgroundInformation', 800, 'characterTitle', "...Are you comfortable with this?", 1, undefined, 'characterF', 0, undefined, undefined, undefined, 0, 'characterO');
                             nextLine(48, 'Miss Liu', 'backgroundInformation', 800, 'characterTitle', "(Shaking her head) I'm used to it...and it's only two sharing one courtyard. Don't worry.", 1, undefined, 'characterO', 0, undefined, undefined, undefined, 0, 'characterF');
                             nextLine(49, undefined, 'backgroundInformation', 800, undefined, "Come in, I'll help you tidy up.");
-                            nextLine(50, '', 'backgroundInformation', 800, 'characterTitle', 'You nodded and followed her in, but something kept on ringing in the back of your mind...Did you forget something?', 1);
+                            nextLine(50, '', 'backgroundInformation', 800, 'characterTitle', 'You nodded and followed her in, but something kept on ringing in the back of your mind...did you forget something?', 1);
                             nextLine(51, '', 'backgroundInformation', 1200, 'characterTitle', '', 1, undefined, undefined, 0, undefined, undefined, undefined, 0, 'characterO');
                         }, 5000);
                     });
@@ -1440,7 +1440,7 @@ function conclusion() {
             var understanding = { Learned: $('#description').val() };
             addUnderstanding(understanding, url1, apikey);
         });
-    }, 4500);
+    }, 4000);
 };
 
 //Section of code for the updating of menu if user chooses the wrong choice
