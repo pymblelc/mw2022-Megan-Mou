@@ -1,0 +1,629 @@
+img{
+    position: absolute;
+}
+
+/*background images*/
+
+#context{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 60;
+    left: 0px;
+    top: 0px;
+    display: none;
+}
+
+#recallBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 300;
+    display: none;
+}
+
+#transparentBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 210;
+    display: block;
+}
+
+#informationBackground{
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 310;
+    position: absolute;
+    display: none;
+}
+
+#backUp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 220;
+    display: none;
+}
+
+.border{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 200;
+    display: none;
+}
+
+#archeology{
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+
+#desk{
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    display: none;
+    z-index: 35;
+}
+
+.map{
+    left: 0px;
+    top: 0px;
+    z-index: 95;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+}
+
+.street{
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+}
+
+#privateRoom{
+    z-index: 110;
+}
+
+text{
+    position: absolute;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 10;
+    display: none;
+}
+
+.arrays{
+    z-index: 300;
+    position: absolute;
+    display: block;
+    top: 180px;
+    left: 450px;
+}
+
+#prologue{
+    position: absolute;
+    left: 650px;
+    top: 450px;
+    z-index: 65;
+    display: block;
+    display: none;
+}
+
+#characterIdentityE{
+    top: 250px;
+    right: 500px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterEIdentity{
+    right: 160px;
+    top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityF{
+    top: 250px;
+    left: 250px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterFIdentity{
+    left: 320px;
+    top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityG{
+    top: 250px;
+    right: 500px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterGIdentity{
+    right: 160px;
+    top: 350px;
+    z-index: 90;
+}
+
+#characterIdentityJ{
+    top: 250px;
+    left: 250px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 90;
+}
+
+#characterJIdentity{
+    left: 320px;
+    top: 350px;
+    z-index: 90;
+}
+
+#greenJadeite{
+    top: 250px;
+    left: 600px;
+    z-index: 40;
+    width: 15%;
+    height: auto;
+    display: none;
+}
+
+#redJadeite{
+    top: 250px;
+    left: 600px;
+    z-index: 55;
+    width: 15%;
+    height: auto;
+    display: none;
+}
+
+#tealJadeite{
+    top: 250px;
+    left: 600px;
+    z-index: 40;
+    width: 15%;
+    height: auto;
+    display: none;
+}
+
+#inspecting{
+    bottom: 100px;
+    left: 450px;
+    z-index: 60;
+    width: 70%;
+    height: auto;
+    display: none;
+}
+
+#characterA{
+    width: 28%;
+    height: auto;
+    left: 23px;
+    bottom: 3px;
+    z-index: 205;
+    display: none;
+}
+
+#characterB{
+    width: 45%;
+    height: auto;
+    left: 405px;
+    bottom: 0px;
+    display: none;
+}
+
+#characterC{
+    width: 45%;
+    height: auto;
+    left: 405px;
+    bottom: 0px;
+    z-index: 30;
+    display: none;
+}
+
+#characterH{
+    width: 45%;
+    height: -webkit-fill-available;
+    left: 350px;
+    bottom: 0px;
+    object-fit: cover;
+    z-index: 120;
+    display: none;
+}
+
+#characterI{
+    width: 43%;
+    z-index: 120;
+    left: 400px;
+    bottom: 0px;
+    display: none;
+}
+
+#characterK{
+    width: 55%;
+    left: 400px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterL{
+    width: 40%;
+    left: 420px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterM{
+    width: 50%;
+    height: -webkit-fill-available;
+    left: 350px;
+    bottom: 0px;
+    object-fit: cover;
+    z-index: 120;
+    display: none;
+}
+
+#characterN{
+    width: 41%;
+    left: 400px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterO{
+    width: 40%;
+    left: 370px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterP{
+    width: 44%;
+    left: 350px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterQ{
+    width: 47%;
+    left: 380px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterR{
+    width: 40%;
+    left: 490px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterS{
+    width: 43%;
+    left: 422px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+#characterT{
+    width: 46%;
+    left: 385px;
+    bottom: 0px;
+    z-index: 120;
+    display: none;
+}
+
+.hover-opacity {
+    opacity: 50%;
+    transition-duration: 1s;
+}
+
+.hover-opacity:hover {
+    opacity: 100%;
+}
+
+#textBox{
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: auto;
+    z-index: 195;
+    display: none;
+}
+
+#bambooSlip{
+    left: -48px;
+    bottom: 40px;
+    width: 50%;
+    height: auto;
+    display: none;
+}
+
+#Word{
+    width: 75%;
+    height: auto;
+    left: 160px;
+    top: 105px;
+    z-index: 25;
+    display: none;
+}
+
+#introduction{
+    height: auto;
+    top: 550px;
+    left: 213px;
+    text-align: center;
+}
+
+#characterName{
+    color: wheat;
+    font-size: 28px;
+    left: 470px;
+    bottom: 110px;
+    z-index: 200;
+}
+
+#characterTitle{
+    color: wheat;
+    font-size: 28px;
+    left: 200px;
+    bottom: 110px;
+    z-index: 200;
+}
+
+#backgroundContext{
+    color: beige;
+    left: 470px;
+    bottom: 60px;
+    text-align: left;
+    z-index: 200;
+}
+
+#backgroundInformation{
+    color: beige;
+    left: 200px;
+    bottom: 60px;
+    text-align: left;
+    z-index: 200;
+}
+
+#startGame{
+    bottom: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    position: absolute;
+    display: none;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    cursor: pointer;
+}
+
+#submit{
+    right: 240px;
+    bottom: 220px;
+    height: 50px;
+    width: 100px;
+    background-color:rgb(231, 104, 69);
+    border-color: whitesmoke;
+    border-radius: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    z-index: 330;
+    position: absolute;
+    display: none;
+}
+
+#confirmSelection{
+    bottom: 250px;
+    right: 130px;
+    height: 50px;
+    width: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    border-radius: 100px;
+    position: absolute;
+    display: none;
+    z-index: 95;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    cursor: pointer;
+}
+
+#confirmNext{
+    top: 400px;
+    right: 540px;
+}
+
+.choices{
+    height: 55px;
+    width: 700px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    position: absolute;
+    display: none;
+    z-index: 125;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+#firstChoice{
+    left: 385px;
+    top: 330px;
+}
+
+#secondChoice{
+    left: 385px;
+    top: 400px;
+}
+
+#thirdChoice{
+    left: 385px;
+    top: 330px;
+}
+
+#fourthChoice{
+    left: 385px;
+    top: 400px;
+}
+
+#fifthChoice{
+    left: 385px;
+    top: 330px;
+}
+
+#sixthChoice{
+    left: 385px;
+    top: 400px;
+}
+
+#selection{
+    width: 100%;
+    height: 100%;
+    z-index: 70;
+    left: 0px;
+    top: 0px;
+    display: none;
+}
+
+.destination{
+    height: 50px;
+    width: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    border-radius: 100px;
+    position: absolute;
+    display: none;
+    z-index: 105;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.menu{
+    height: 50px;
+    width: 100px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 305;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    cursor: pointer;
+}
+
+#backButton{
+    display: none;
+}
+
+#streetDestination{
+    right: 840px;
+    bottom: 180px;
+}
+
+#templeDestination{
+    top: 100px;
+    left: 100px;
+}
+
+#marketDestination{
+    left: 670px;
+    bottom: 290px;
+}
+
+#teaHouseDestination{
+    right: 200px;
+    top: 200px;
+}
+
+#entranceDestination{
+    top: 142px;
+    left: 259px;
+}
+
+#enterTemple{
+    left: 669px;
+    bottom: 10px;
+}
+
+#enterHall{
+    top: 480px;
+    left: 670px;
+}
+
+#enterRestaurant{
+    left: 640px;
+    bottom: 300px;
+}
+
+#enterRoom{
+    left: 545px;
+    bottom: 295px;
+}
+
+#windowSide{
+    left: 165px;
+    bottom: 290px;
+}
+
+#description{
+    top: 245px;
+    left: 227px;
+    height: 370px;
+    width: 1000px;
+    opacity: 80%;
+    border: 1px solid rgb(240, 188, 179);
+    border-radius: 10px;
+    background-color: white;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 320;
+    position: absolute;
+    display: none;
+}
+
+#instruction{
+    top: 210px;
+    left: 545px;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 330;
+    position: absolute;
+    display: none;
+}

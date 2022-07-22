@@ -1,1 +1,118 @@
-<!-- Add your website root here -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Story</title>
+    <link rel="stylesheet" href="css/interactiveStory.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="transitions"></div>
+    <div class="time"></div>
+    <div class="coverBackground"></div>
+        <img id="recallBackground" img src="Images/Recall.png">
+        <img id="transparentBackground" img src="Images/Transparent.png">
+        <img id="informationBackground" img src="Images/Information.jpg">
+        <img id="backUp" img src="Images/Transparent.png">
+    <div class="choiceSelecting"></div>
+        <img id="context" img src="Images/Context.jpg">
+    <div class="normalBackground"></div>
+        <img id="archeology" img src="Images/Archeology.png">
+        <img id="desk" img src="Images/Desk.jpg">
+    <div class="choiceMaking"></div>
+        <img id="selection" img src="Images/Selection.png">
+    <div class="conversations"></div>
+        <img id="textBox" img src="Images/Conversation.png">
+        <img id="bambooSlip" img src="Images/Bamboo.png">
+    <div class="texts"></div>
+        <text id="introduction">Sometimes I wonder...out of the<br>vast number of people...why me?</text>
+        <text id="characterName">You</text>
+        <text id="backgroundContext">In the early spring of 1974, on the outskirts of Xian, struck one of the greatest archaeological discoveries in the world:<br>a life-size clay soldier poised for battle. </text>
+        <text id="prologue">《Prologue End》</text>
+        <text id="characterIdentityE">萧氏（Xiao）</text>
+        <text id="characterEIdentity">Age: 15<br>Personality: Sensible, gentle and rational<br>Background: Came from an eminent family, and<br>'willingly' behaves according to a strict set of social expectations<br>Comment: Used to maintain power.</text>
+        <text id="characterIdentityF">顾氏（Gu）</text>
+        <text id="characterFIdentity">Age: 17<br>Personality: Cheerful and straightforward<br>Background: Unrestrained and likes adventure,<br>willing to help whenever encountering requests<br>Comment: Seems to disregard comments of the<br>outside world, but is it the truth?</text>
+        <text id="characterIdentityG">墨氏（Mo）</text>
+        <text id="characterGIdentity">Age: 16<br>Personality: Uninhibited, cunning and detached<br>Background: Disguised as a men, extremely talented<br>and lives a dashing life<br>Comment: A splendid lifestyle at first sight, but has her<br>own unspeakable difficulties</text>
+        <text id="characterIdentityJ">楼氏（Lou）</text>
+        <text id="characterJIdentity">Age: 18<br>Personality: Always similing, exquisite on all sides and aspects<br>Background: Situates in a politically permeated atmosphere,<br>trained to deal with guests through entertainment and<br>tries to collect confidential information<br>Comment: Looked down upon by many, sometimes even herself</text>
+        <text id="characterTitle">Maid</text>
+        <text id="backgroundInformation"></text>
+        <text id="instruction">What do you now think of women in ancient China?</text>
+    <div class="inputs"></div>
+        <textarea id="description" type="text"></textarea>
+    <div class="buttons"></div>
+        <button id="startGame">Begin</button>
+        <!--<button id="nextScene">Next</button>-->
+        <button id="submit">Submit</button>
+        <button id="confirmSelection">Confirm</button>
+        <button id="confirmNext" class="destination">Next</button>
+        <button id="confirmLast" class="destination">Next</button>
+        <button id="templeDestination" class="destination">Temple</button>
+        <button id="streetDestination" class="destination">Market</button>
+        <button id="marketDestination" class="destination">Market</button>
+        <button id="teaHouseDestination" class="destination">Tea House</button>
+        <button id="enterTemple" class="destination">Enter</button>
+        <button id="firstChoice" class="choices">Move slightly towards their direction</button>
+        <button id="secondChoice" class="choices">Staying where you are and going upstairs</button>
+        <button id="thirdChoice" class="choices">Yes</button>
+        <button id="fourthChoice" class="choices">No</button>
+        <button id="fifthChoice" class="choices">Agree</button>
+        <button id="sixthChoice" class="choices">Disagree</button>
+        <button id="entranceDestination" class="destination">Entrance</button>
+        <button id="enterHall" class="destination">Enter</button>
+        <button id="enterRestaurant" class="destination">Restaurant</button>
+        <button id="enterRoom" class="destination">Room</button>
+        <button id="windowSide" class="destination">Window</button>
+        <button id="menuButton" class="menu">Menu</button>
+        <button id="backButton" class="menu">Return</button>
+    <div class="characters"></div>
+        <img id="characterA" img src="Images/CharacterA.png">
+        <img id="characterB" img src="Images/Archaeologist.png">
+        <img id="characterC" img src="Images/Governer.png">
+        <img id="characterH" img src="Images/CharacterH.png">
+        <img id="characterI" img src="Images/CharacterI.png">
+        <img id="characterK" img src="Images/CharacterK.png">
+        <img id="characterL" img src="Images/CharacterL.png">
+        <img id="characterM" img src="Images/CharacterM.png">
+        <img id="characterN" img src="Images/CharacterN.png">
+        <img id="characterO" img src="Images/CharacterO.png">
+        <img id="characterP" img src="Images/CharacterP.png">
+        <img id="characterQ" img src="Images/CharacterQ.png">
+        <img id="characterR" img src="Images/CharacterR.png">
+        <img id="characterS" img src="Images/CharacterS.png">
+        <img id="characterT" img src="Images/CharacterT.png">
+    <div class="female"></div>
+    <div class="objects"></div>
+        <img id="redJadeite" img src="Images/Red.png">
+    <div class="actions"></div>
+        <img id="inspecting" img src="Images/Inspecting.png">
+    <div class="map"></div>
+        <img id="mapE" class="map" img src="Images/MapE.jpg">
+        <img id="mapF" class="map" img src="Images/MapF.jpg">
+        <img id="mapG" class="map" img src="Images/MapG.jpg">
+    <div class="street"></div>
+        <img id="streetE" class="street" img src="Images/StreetE.jpg">
+        <img id="storeEE" class="street" img src="Images/StoreEE.jpg">
+        <img id="secondFloorEE" class="street" img src="Images/SecondFloorEE.jpg">
+        <img id="roomE" class="street" img src="Images/RoomE.jpg">
+        <img id="privateRoom" class="street" img src="Images/PrivateRoom.jpg">
+        <img id="templeDayE" class="street" img src="Images/TempleDay.jpg">
+        <img id="templeSunsetE" class="street" img src="Images/TempleSunset.jpg">
+        <img id="gateF" class="street" img src="Images/GateF.jpg">
+        <img id="meetingRoomF" class="street" img src="Images/MeetingRoomF.jpg">
+        <img id="gardenF" class="street" img src="Images/GardenF.jpg">
+        <img id="martialF" class="street" img src="Images/MartialF.png">
+        <img id="courtyardF" class="street" img src="Images/CourtyardF.jpg">
+        <img id="roomF" class="street" img src="Images/RoomF.jpg">
+        <img id="streetG" class="street" img src="Images/StreetG.jpg">
+        <img id="doorG" class="street" img src="Images/DoorG.jpg">
+        <img id="roomG" class="street" img src="Images/RoomG.jpg">
+        <img id="windowG" class="street" img src="Images/WindowG.jpg">
+    <div class="arrays"></div>
+</body>
+<script type="text/javascript" src="js/interactiveStory.js"></script>
+</html>
